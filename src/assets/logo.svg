@@ -1,0 +1,36 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 100 100"
+  fill="none"
+>
+  <!-- Circle background -->
+  <circle cx="50" cy="50" r="45" fill="#A8DADC" />
+
+  <!-- Pencil -->
+  <polygon
+    points="40,30 42,70 48,70 50,30"
+    fill="#F1FAEE"
+    stroke="#1D3557"
+    stroke-width="2"
+  />
+  <polygon
+    points="40,30 50,30 45,25"
+    fill="#E63946"
+    stroke="#1D3557"
+    stroke-width="2"
+  />
+
+  <!-- Ruler -->
+  <rect
+    x="55"
+    y="30"
+    width="5"
+    height="40"
+    fill="#F1FAEE"
+    stroke="#1D3557"
+    stroke-width="2"
+  />
+  <line x1="56" y1="35" x2="59" y2="35" stroke="#457B9D" stroke-width="1" />
+  <line x1="56" y1="40" x2="59" y2="40" stroke="#457B9D" stroke-width="1" />
+  <line x1="56" y1="45" x2="59" y2="45" stroke="#457B9D" stroke-width="1" />
+</svg>
