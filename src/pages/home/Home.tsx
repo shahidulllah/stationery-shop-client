@@ -1,10 +1,11 @@
-import { Outlet } from "react-router";
+
 
 
 const Home = () => {
     return (
-        <div className="h-screen">
-            <Outlet/>
+        <div className="h-screen bg-gray-600 flex items-center justify-center">
+          
+
         </div>
     );
 };
