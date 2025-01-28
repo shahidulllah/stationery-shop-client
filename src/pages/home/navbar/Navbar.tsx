@@ -130,7 +130,7 @@ const Navbar = () => {
         >
           <div className="p-6">
             <div className="flex justify-between items-center mb-8">
-            <img src="/src/assets/logo.svg" alt="" />
+            {/* <img src="/src/assets/logo.svg" alt="" /> */}
                 <h1 className={`font-bold text-3xl  dark:text-white`}>
                   Cryptop
                 </h1>
