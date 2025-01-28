@@ -31,9 +31,9 @@ export default function Footer() {
           {/* Logo */}
           <div className="flex items-center space-x-2">
           <Link to="/" className="flex items-center space-x-3">
-                <img src="/src/assets/logo.svg" alt="" />
+                {/* <img src="/src/assets/logo.svg" alt="" /> */}
                 <h1 className="font-bold text-3xl text-white dark:text-white">
-                  Cryptop
+                STN shop
                 </h1>
               </Link>
           </div>
@@ -44,7 +44,7 @@ export default function Footer() {
               We believe in simplicity, speed, and security.
             </p>
             <p className="text-[#ffffff] dark:text-gray-300">
-              Start with Cryptop Today and convert your crypt into a card you
+              Start with STN shop Today and convert your crypt into a card you
               can use anywhere – and fast.
             </p>
           </div>
@@ -80,9 +80,9 @@ export default function Footer() {
           {/* Copyright and Social Links */}
           <div className="w-full flex flex-col md:flex-row justify-between space-y-4 md:space-y-0 text-start">
          <div>
-          <p className="text-xl text-[#ffffff] dark:text-gray-400 font-bold font-oswald">Cryptop</p>
+          <p className="text-xl text-[#ffffff] dark:text-gray-400 font-bold font-oswald"> STN shop</p>
             <p className="text-sm text-[#ffffff] dark:text-gray-400">
-              Copyright © 2024 Cryptop All Rights Reserved
+              Copyright © 2024  STN shop All Rights Reserved
             </p>
          </div>
             <div className="flex justify-end space-x-4 text-[#ffffff]">

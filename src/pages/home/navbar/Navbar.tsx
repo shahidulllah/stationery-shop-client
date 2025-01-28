@@ -66,7 +66,7 @@ const Navbar = () => {
               {/* This is logo */}
                <img src="" alt="" />
                 <h1 className={`font-bold text-3xl  dark:text-white`}>
-                  Cryptop
+                STN shop
                 </h1>
               </Link>
             </div>
@@ -92,12 +92,12 @@ const Navbar = () => {
                   <Moon className={`h-5 w-5 hover:text-black `} />
                 )}
               </button>
-              {/* <Link
+              <Link
                 to="/auth"
                 className="bg-[#0AE08F] text-white px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
               >
                 Sign Up Now
-              </Link> */}
+              </Link>
             </div>
 
             {/* Mobile menu button */}
@@ -132,7 +132,7 @@ const Navbar = () => {
             <div className="flex justify-between items-center mb-8">
             {/* <img src="/src/assets/logo.svg" alt="" /> */}
                 <h1 className={`font-bold text-3xl  dark:text-white`}>
-                  Cryptop
+                STN shop
                 </h1>
               <button
                 onClick={closeMenu}
