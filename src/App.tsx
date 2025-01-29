@@ -1,9 +1,10 @@
+import { ThemeProvider } from "./components/theme-provider";
 import MainLayout from "./layout/MainLayout";
 
 export default function App() {
   return (
-    <h1>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <MainLayout/>
-    </h1>
+    </ThemeProvider>
   )
 }
