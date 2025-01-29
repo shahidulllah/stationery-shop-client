@@ -1,20 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { Link } from 'react-router';
 import { useTheme } from '@/components/theme-provider';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const { theme, setTheme } = useTheme();
+//   const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 0);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       setScrolled(window.scrollY > 0);
+//     };
+//     window.addEventListener('scroll', handleScroll);
+//     return () => window.removeEventListener('scroll', handleScroll);
+//   }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
