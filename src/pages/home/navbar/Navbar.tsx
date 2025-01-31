@@ -37,7 +37,7 @@ const Navbar = () => {
       )}
 
       <nav
-        className={`fixed w-full top-0 z-50 transition-colors duration-300`}
+        className={`fixed bg-white dark:bg-transparent w-full top-0 z-50 transition-colors duration-300`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -69,10 +69,16 @@ const Navbar = () => {
                 )}
               </button>
               <Link
-                to="/auth"
+                to="/login"
                 className="bg-[#0AE08F] text-white px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
               >
-                Sign Up Now
+               Login Now
+              </Link>
+              <Link
+                to="/register"
+                className="bg-[#0AE08F] text-white px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
+              >
+               Register Now
               </Link>
             </div>
 
