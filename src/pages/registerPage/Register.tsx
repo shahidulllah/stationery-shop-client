@@ -1,50 +1,36 @@
-'use client'
-
-import { useState} from 'react'
-import { ArrowLeft, Eye, EyeOff } from 'lucide-react'
-import { Link } from 'react-router'
-// import Link from 'next/link'
-// import CountryPicker from '../../../components/auth/CountryPicker'
-// import RightAuthContent from '../../../components/auth/RightAuthContent'
-// import images from '../../../images'
-// import BottomSheet from '../../../components/auth/BottomSheet'
-// import { useRouter } from 'next/navigation'
-// import { useMutation } from '@apollo/client'
-// import { REGISTER_USER } from '../../graphql/mutations/auth'
-// import { client } from '../../lib/apollo-client'
-
-// const content = {
-//   logo: {
-//     src: '',
-//     alt: 'Cryptop',
-//   },
-//   paragraphs: [
-//     "At Cryptop, we believe that everyone should have easy, secure access to their digital assets, no matter where they are or what they're doing.",
-//     'We are committed to providing a seamless way for people to convert their crypto into spendable currency, bridging the gap between traditional and digital currencies through our digital and physical cards.',
-//     "Our mission is to bridge the gap between cryptocurrency and daily life, enabling our users to spend their crypto wherever they shop, whether it's at your local supermarket, gas station, or online stores.",
-//     "With our platform, your crypto is not just an investment, it's your currency for everyday use, easily accessible and ready when you are.",
-//   ],
-  
-// }
+import { useState } from "react";
+import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { useRegisterUserMutation } from "@/redux/api/authApi";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/redux/slices/authSlice";
 
 export default function RegisterPage() {
-//   const router = useRouter()
-  const [showPassword, setShowPassword] = useState(false)
-  
+  const [showPassword, setShowPassword] = useState(false);
+  const [registerUser] = useRegisterUserMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
-    email: '',
-    phone: '',
-    password: '',
-    confirmPassword: '',
-  })
+    name: "",
+    email: "",
+    password: "",
+  });
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
-    e.preventDefault()
-   
-  }
-
- 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const res = await registerUser(formData).unwrap();
+      dispatch(setUser(res));
+      navigate("/dashboard");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="min-h-screen lg:h-screen flex flex-col lg:flex-row">
@@ -78,6 +64,21 @@ export default function RegisterPage() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3"
+              >
+                Name
+              </label>
+              <input
+                type="text"
+                placeholder="Name"
+                onChange={handleChange}
+                className="w-full px-4 py-3 border border-gray-300 rounded-full text-[#101010] dark:text-white bg-white dark:bg-[#101010] focus:outline-none focus:ring-2 focus:ring-[#0AE08F]"
+                required
+              />
+            </div>
+            <div>
+              <label
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3"
               >
@@ -85,11 +86,8 @@ export default function RegisterPage() {
               </label>
               <input
                 type="email"
-                id="email"
-                value={formData.email}
-                onChange={e =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
+                placeholder="Give your Email"
+                onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-full text-[#101010] dark:text-white bg-white dark:bg-[#101010] focus:outline-none focus:ring-2 focus:ring-[#0AE08F]"
                 required
               />
@@ -103,17 +101,13 @@ export default function RegisterPage() {
                 Password
               </label>
               <input
-                type={showPassword ? 'text' : 'password'}
-                id="password"
-                value={formData.password}
-                onChange={e =>
-                  setFormData({ ...formData, password: e.target.value })
-                }
+                type={showPassword ? "text" : "password"}
+                onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-full text-[#101010] dark:text-white bg-white dark:bg-[#101010] focus:outline-none focus:ring-2 focus:ring-[#0AE08F]"
                 required
               />
               <button
-                type="button"
+                type="submit"
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-12 text-gray-500"
               >
@@ -125,49 +119,23 @@ export default function RegisterPage() {
               </button>
             </div>
 
-            <div className="relative">
-              <label
-                htmlFor="confirmPassword"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3"
-              >
-                Repeat the password
-              </label>
-              <input
-                // type={showConfirmPassword ? 'text' : 'password'}
-                id="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={e =>
-                  setFormData({ ...formData, confirmPassword: e.target.value })
-                }
-                className="w-full px-4 py-3 border border-gray-300 rounded-full text-[#101010] dark:text-white bg-white dark:bg-[#101010] focus:outline-none focus:ring-2 focus:ring-[#0AE08F]"
-                required
-              />
-              <button
-                type="button"
-                // onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="absolute right-3 top-12 text-gray-500"
-              >
-              </button>
-            </div>
-
             <div className="text-sm text-gray-600 dark:text-gray-300">
-              By creating an account you agree to our{' '}
+              By creating an account you agree to our{" "}
               <Link to="/terms" className="text-[#0AE08F] hover:underline">
                 Terms of Service
               </Link>
             </div>
 
-           
             <button
               type="submit"
               className="w-full bg-[#0AE08F] text-white py-4 rounded-full hover:opacity-90 transition-all duration-200 text-base font-medium disabled:opacity-50"
             >
-              {'Sign Up'}
+              {"Sign Up"}
             </button>
 
             <div className="text-center">
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Already have an account?{' '}
+                Already have an account?{" "}
                 <Link
                   to="/auth/login"
                   className="text-[#0AE08F] hover:underline"
@@ -179,7 +147,6 @@ export default function RegisterPage() {
           </form>
         </div>
       </div>
-
     </div>
-  )
+  );
 }
