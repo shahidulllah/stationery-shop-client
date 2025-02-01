@@ -1,27 +1,45 @@
-import App from "@/App";
 import About from "@/pages/aboutPage/About";
 import LoginPage from "@/pages/loginPage/Login";
 import AllProducts from "@/pages/productPage/AllProducts";
 import Cart from "@/pages/productPage/Cart";
 import ProductDetails from "@/pages/productPage/ProductDetails";
 import RegisterPage from "@/pages/registerPage/Register";
-import { Route, BrowserRouter as Router } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
+import { PrivateRoute } from "./privateRoute";
+import Dashboard from "@/pages/dashboard/Dashboard";
+import UserDashboard from "@/pages/dashboard/UserDashboard";
+import AdminDashboard from "@/pages/dashboard/AdminDashboard";
+import { AdminRoute } from "./adminRoute";
+import MainLayout from "@/layout/MainLayout";
+import Home from "@/pages/home/Home";
 
-const AppRoutes = () => {
-  return (
-    <Router>
-        {/* Public Routes */}
-      <Route path="/" element={<App />} />
-      <Route path="/products" element={<AllProducts />} />
-      <Route path="/product/:id" element={<ProductDetails />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/cart" element={<Cart />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<RegisterPage />} />
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: "products", element: <AllProducts /> },
+      { path: "product/:id", element: <ProductDetails /> },
+      { path: "about", element: <About /> },
+      { path: "cart", element: <Cart /> },
+    ],
+  },
+  { path: "/login", element: <LoginPage /> },
+  { path: "/register", element: <RegisterPage /> },
 
-      {/* Private Routes */}
-    </Router>
-  );
-};
+  // Private Routes
+  { path: "/dashboard", 
+    element: <PrivateRoute><Dashboard /></PrivateRoute>,
+  },
+  {
+    path: "/dashboard/user",
+    element: <PrivateRoute><UserDashboard /></PrivateRoute>,
+  },
 
-export default AppRoutes;
+  // Admin Routes
+  {
+    path: "/dashboard/admin",
+    element: <AdminRoute><AdminDashboard/></AdminRoute>,
+  },
+]);
