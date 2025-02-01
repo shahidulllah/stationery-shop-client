@@ -1,11 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { Link } from "react-router";
 import { useTheme } from "@/components/theme-provider";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/redux/slices/authSlice";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, setTheme } = useTheme();
+  const dispatch = useDispatch();
+  const user = useSelector((state: any) => state.auth.user);
+
   //   const [scrolled, setScrolled] = useState(false);
 
   //   useEffect(() => {
@@ -22,7 +28,7 @@ const Navbar = () => {
 
   const menuItems = [
     { label: "Home", href: "/" },
-    { label: "Why Us", href: "/why-us" },
+    { label: "All products", href: "/why-us" },
     { label: "The Project", href: "/project" },
     { label: "FAQ", href: "/faq" },
   ];
@@ -44,7 +50,9 @@ const Navbar = () => {
             <div className="flex-shrink-0">
               <Link to="/" className="flex items-center space-x-3">
                 <img src="" alt="" />
-                <h1 className="font-bold text-3xl dark:text-white">STN Crack</h1>
+                <h1 className="font-bold text-3xl dark:text-white">
+                  STN Crack
+                </h1>
               </Link>
             </div>
 
@@ -68,18 +76,31 @@ const Navbar = () => {
                   <Moon className="h-5 w-5 text-black" />
                 )}
               </button>
-              <Link
-                to="/login"
-                className="bg-[#0AE08F] text-white px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
-              >
-               Login Now
-              </Link>
-              <Link
-                to="/register"
-                className="bg-[#0AE08F] text-white px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
-              >
-               Register Now
-              </Link>
+              {user ? (
+                <>
+                  <button
+                    className="bg-[#0AE08F] text-white px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
+                    onClick={() => dispatch(logout())}
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    className="bg-[#0AE08F] text-white px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
+                  >
+                    Login Now
+                  </Link>
+                  <Link
+                    to="/register"
+                    className="bg-[#0AE08F] text-white px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
+                  >
+                    Register Now
+                  </Link>
+                </>
+              )}
             </div>
 
             <div className="md:hidden flex items-center space-x-4">
