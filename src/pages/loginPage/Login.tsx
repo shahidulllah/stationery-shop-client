@@ -1,43 +1,36 @@
-import { useState } from 'react'
-import { ArrowLeft, Eye, EyeOff } from 'lucide-react'
-import { Link } from 'react-router'
-// import Link from 'next/link'
-// import BottomSheet from '../../../components/auth/BottomSheet'
-// import RightAuthContent from '../../../components/auth/RightAuthContent'
-// import { useMutation } from '@apollo/client'
-// import { LOGIN_USER } from '../../graphql/mutations/auth'
-// import { client } from '../../lib/apollo-client'
-// import { setAuthToken } from '../../lib/cookies'
-// import images from '../../../images'
-
-// const content = {
-//   logo: {
-//     src: '',
-//     alt: 'Cryptop',
-//   },
-//   paragraphs: [
-//     "At Cryptop, we believe that everyone should have easy, secure access to their digital assets, no matter where they are or what they're doing.",
-//     'We are committed to providing a seamless way for people to convert their crypto holdings into everyday spending power through our innovative digital and physical cards.',
-//     "Our mission is to bridge the gap between cryptocurrency and daily life, enabling our users to spend their crypto wherever they shop - whether it's at your local supermarket, gas station, or online stores.",
-//     "With our platform, your crypto is not just an investment, it's your currency for everyday use, easily accessible and ready when you are.",
-//   ],
- 
-// }
+import { useState } from "react";
+import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { useLoginUserMutation } from "@/redux/api/authApi";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/redux/slices/authSlice";
 
 export default function LoginPage() {
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+  const [loginUser] = useLoginUserMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
     rememberMe: false,
-  })
+  });
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
-    e.preventDefault()
-    
-  }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const res = await loginUser(formData).unwrap();
+      dispatch(setUser(res));
+      navigate("/dashboard");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="min-h-screen lg:h-screen flex flex-col lg:flex-row">
@@ -78,11 +71,9 @@ export default function LoginPage() {
               </label>
               <input
                 type="email"
-                id="email"
-                value={formData.email}
-                onChange={e =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
+                name="email"
+                placeholder="Enter your Email"
+                onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-full text-[#101010] dark:text-white bg-white dark:bg-[#101010] focus:outline-none focus:ring-2 focus:ring-[#0AE08F] focus:border-transparent transition-all duration-200"
                 required
               />
@@ -97,17 +88,15 @@ export default function LoginPage() {
               </label>
               <div className="relative">
                 <input
-                  type={showPassword ? 'text' : 'password'}
-                  id="password"
-                  value={formData.password}
-                  onChange={e =>
-                    setFormData({ ...formData, password: e.target.value })
-                  }
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  placeholder="Type your Password"
+                  onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-full text-[#101010] dark:text-white bg-white dark:bg-[#101010] focus:outline-none focus:ring-2 focus:ring-[#0AE08F] focus:border-transparent transition-all duration-200"
                   required
                 />
                 <button
-                  type="button"
+                  type="submit"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
                 >
@@ -125,7 +114,7 @@ export default function LoginPage() {
                 <input
                   type="checkbox"
                   checked={formData.rememberMe}
-                  onChange={e =>
+                  onChange={(e) =>
                     setFormData({ ...formData, rememberMe: e.target.checked })
                   }
                   className="w-4 h-4 border-gray-300 rounded text-[#0AE08F] focus:ring-[#0AE08F] transition-colors"
@@ -151,7 +140,7 @@ export default function LoginPage() {
 
             <div className="text-center">
               <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors">
-                Don't have an account?{' '}
+                Don't have an account?{" "}
                 <Link
                   to="/auth/signup"
                   className="text-[#0AE08F] hover:underline transition-colors"
@@ -164,5 +153,5 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

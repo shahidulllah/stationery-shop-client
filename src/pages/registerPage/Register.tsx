@@ -71,6 +71,7 @@ export default function RegisterPage() {
               </label>
               <input
                 type="text"
+                name="name"
                 placeholder="Name"
                 onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-full text-[#101010] dark:text-white bg-white dark:bg-[#101010] focus:outline-none focus:ring-2 focus:ring-[#0AE08F]"
@@ -86,6 +87,7 @@ export default function RegisterPage() {
               </label>
               <input
                 type="email"
+                name="email"
                 placeholder="Give your Email"
                 onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-full text-[#101010] dark:text-white bg-white dark:bg-[#101010] focus:outline-none focus:ring-2 focus:ring-[#0AE08F]"
@@ -102,6 +104,7 @@ export default function RegisterPage() {
               </label>
               <input
                 type={showPassword ? "text" : "password"}
+                name="password"
                 onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-full text-[#101010] dark:text-white bg-white dark:bg-[#101010] focus:outline-none focus:ring-2 focus:ring-[#0AE08F]"
                 required
