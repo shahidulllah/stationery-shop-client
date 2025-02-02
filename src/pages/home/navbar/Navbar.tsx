@@ -28,8 +28,8 @@ const Navbar = () => {
   const menuItems = [
     { label: "Home", href: "/" },
     { label: "All products", href: "/products" },
-    { label: "The Project", href: "/project" },
-    { label: "FAQ", href: "/faq" },
+    { label: "About", href: "/about" },
+    { label: "Cart", href: "/cart" },
   ];
 
   return (
@@ -41,7 +41,7 @@ const Navbar = () => {
         />
       )}
 
-      <nav className="fixed bg-white dark:bg-transparent w-full top-0 z-50 transition-colors duration-300">
+      <nav className="fixed mb-12 bg-white dark:bg-transparent w-full top-0 z-50 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex-shrink-0">

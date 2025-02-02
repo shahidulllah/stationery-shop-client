@@ -1,14 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { CartItem, Order } from "@/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
-// Define types for better structure
-interface Order {
-  id: string;
-  items: any[];
-  totalAmount: number;
-  status: string;
-}
 
 interface OrderState {
   orders: Order[];
@@ -25,9 +18,13 @@ const initialState: OrderState = {
 
 export const placeOrder = createAsyncThunk(
   "orders/placeOrder",
-  async (orderData) => {
-    const response = await axios.post("/api/orders", orderData);
-    return response.data;
+  async (orderData: CartItem[], { rejectWithValue }) => {
+    try {
+      const response = await axios.post("/api/orders", { items: orderData });
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data || "Order failed");
+    }
   }
 );
 
