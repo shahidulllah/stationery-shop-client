@@ -22,7 +22,9 @@ const Orders = () => {
           <p>Order #{index + 1}</p>
           <ul>
             {order.map((item) => (
-              <li key={item.id}>{item.name} - {item.quantity}</li>
+              <li key={item.id}>
+                {item.name} - {item.quantity}
+              </li>
             ))}
           </ul>
         </div>
