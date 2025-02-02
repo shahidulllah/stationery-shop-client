@@ -2,14 +2,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchProducts = createAsyncThunk(
-  "products/fetchProducts",
-  async () => {
-    const response = await axios.get("/api/products");
-    return response.data;
-  }
-);
-
 // Define initial state
 interface ProductState {
   products: any[];
@@ -22,6 +14,14 @@ const initialState: ProductState = {
   status: "idle",
   error: null,
 };
+
+export const fetchProducts = createAsyncThunk(
+  "products/fetchProducts",
+  async () => {
+    const response = await axios.get("/api/products");
+    return response.data;
+  }
+);
 
 const productSlice = createSlice({
   name: "products",
