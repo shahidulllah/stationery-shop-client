@@ -4,7 +4,7 @@ import { clearCart } from "@/redux/slices/cartSlice";
 import { placeOrder } from "@/redux/slices/orderSlice";
 
 const Checkout = () => {
-  const dispatch = useDispatch<AppDispatch>(); // Properly typed dispatch
+  const dispatch = useDispatch<AppDispatch>(); 
   const cartItems = useSelector((state: RootState) => state.cart.items);
 
   const handleOrder = () => {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Menu, Sun, Moon, X } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useTheme } from "@/components/theme-provider";
@@ -11,10 +11,6 @@ const Navbar = () => {
   const { theme, setTheme } = useTheme();
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth.user);
-
-  useEffect(() => {
-    console.log("User state updated:", user);
-  }, [user]);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);

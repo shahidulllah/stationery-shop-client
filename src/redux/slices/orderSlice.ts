@@ -20,7 +20,7 @@ export const placeOrder = createAsyncThunk(
   "orders/placeOrder",
   async (orderData: CartItem[], { rejectWithValue }) => {
     try {
-      const response = await axios.post("/api/orders", { items: orderData });
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/orders`, { items: orderData });
       return response.data;
     } catch (error: any) {
       return rejectWithValue(error.response?.data || "Order failed");
@@ -29,7 +29,7 @@ export const placeOrder = createAsyncThunk(
 );
 
 export const fetchOrders = createAsyncThunk("orders/fetchOrders", async () => {
-  const response = await axios.get("/api/orders");
+  const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/orders`);
   return response.data;
 });
 
