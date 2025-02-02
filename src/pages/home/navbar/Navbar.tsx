@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, Sun, Moon, X } from "lucide-react";
+import { Menu, Sun, Moon, X, ShoppingCart } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useTheme } from "@/components/theme-provider";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,7 +25,7 @@ const Navbar = () => {
     { label: "Home", href: "/" },
     { label: "All Products", href: "/products" },
     { label: "About", href: "/about" },
-    { label: "Cart", href: "/cart" },
+    { label: <ShoppingCart />, href: "/cart" },
   ];
 
   return (
@@ -42,7 +42,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-8">
             {menuItems.map((item) => (
               <NavLink
-                key={item.label}
+                key={item.href}
                 to={item.href}
                 className={({ isActive }) =>
                   `text-lg px-3 border-b-2 transition-colors ${
@@ -119,7 +119,7 @@ const Navbar = () => {
         <div className="fixed top-16 left-0 w-full bg-white dark:bg-gray-900 shadow-md z-40 flex flex-col items-center space-y-4 py-4 md:hidden">
           {menuItems.map((item) => (
             <NavLink
-              key={item.label}
+              key={item.href}
               to={item.href}
               className={({ isActive }) =>
                 `text-lg px-3 py-2 border-b-2 transition-colors ${
