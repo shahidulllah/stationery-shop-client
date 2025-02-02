@@ -8,16 +8,18 @@ const AllProducts = () => {
   const dispatch = useDispatch();
   const { products, status, error } = useSelector((state: RootState) => state.products);
 
+  console.log(products);
+
   useEffect(() => {
     dispatch(fetchProducts() as any); 
   }, [dispatch]);
 
-  if (status === "loading") return <p>Loading products...</p>;
-  if (status === "failed") return <p>Error: {error}</p>;
+  if (status === "loading") return <p className="text-black dark:text-white">Loading products...</p>;
+  if (status === "failed") return <p  className="text-black dark:text-white">Error: {error}</p>;
 
   return (
     <div className="grid grid-cols-3 gap-4 p-4">
-      {products.map((product) => (
+      {products?.map((product) => (
         <div key={product.id} className="border p-4 rounded-md">
           <h2 className="text-xl font-bold">{product.name}</h2>
           <p>${product.price}</p>
