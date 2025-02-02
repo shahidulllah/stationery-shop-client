@@ -1,16 +1,12 @@
 import { useState } from "react";
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { useRegisterUserMutation } from "@/redux/api/authApi";
-import { useDispatch } from "react-redux";
-import { setUser } from "@/redux/slices/authSlice";
+import { registerUser } from "@/api/authApi";
+import { toast } from "sonner";
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const [registerUser] = useRegisterUserMutation();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -24,11 +20,12 @@ export default function RegisterPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await registerUser(formData).unwrap();
-      dispatch(setUser(res));
-      navigate("/dashboard");
+      await registerUser(formData);
+      toast.success("Registration successful!");
+      navigate("/login");
     } catch (error) {
       console.log(error);
+      toast.error("Registration failed!");
     }
   };
 

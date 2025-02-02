@@ -4,17 +4,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from "@/redux/api/authApi";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/redux/slices/authSlice";
+import { toast } from "sonner";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loginUser] = useLoginUserMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    rememberMe: false,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,11 +23,13 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await loginUser(formData).unwrap();
-      dispatch(setUser(res));
-      navigate("/dashboard");
+      const data = await loginUser(formData);
+      dispatch(setUser({ user: data.data.user, token: data.data.token }))
+      toast.success("Login successful!");
+      navigate("/");
     } catch (error) {
       console.log(error);
+      toast.error("Login failed!");
     }
   };
 
@@ -107,28 +108,6 @@ export default function LoginPage() {
                   )}
                 </button>
               </div>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <label className="flex items-center space-x-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={formData.rememberMe}
-                  onChange={(e) =>
-                    setFormData({ ...formData, rememberMe: e.target.checked })
-                  }
-                  className="w-4 h-4 border-gray-300 rounded text-[#0AE08F] focus:ring-[#0AE08F] transition-colors"
-                />
-                <span className="text-sm text-gray-600 dark:text-gray-300 transition-colors">
-                  Remember Me
-                </span>
-              </label>
-              <Link
-                to="/auth/forgot-password"
-                className="text-sm text-[#0AE08F] hover:underline transition-colors"
-              >
-                Forgot Password?
-              </Link>
             </div>
 
             <button
