@@ -14,7 +14,7 @@ export interface Order {
   status: string;
 }
 
-interface Product {
+export interface Product {
   _id: string;
   name: string;
   brand: string;
@@ -28,7 +28,7 @@ interface Product {
   __v: number;
 }
 
-interface CartItem {
+export interface CartItem {
   product: Product;
   quantity: number;
 }

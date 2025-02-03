@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CartState } from "@/types";
+import { CartItem, CartState } from "@/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -10,7 +10,6 @@ const initialState: CartState = {
 };
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-
 const getToken = () => localStorage.getItem("token") || "";
 
 // Get cart
@@ -25,10 +24,8 @@ export const fetchCart = createAsyncThunk(
           Authorization: token,
         },
       });
-      console.log(response.data.cart.items);
       return response.data.cart.items;
     } catch (error: any) {
-      console.error(" Error fetching cart:", error.message);
       return rejectWithValue(
         error.response?.data?.message || "Failed to fetch cart"
       );
@@ -57,7 +54,6 @@ export const addToCart = createAsyncThunk(
       );
       return response.data.cart.items;
     } catch (error: any) {
-      console.error(" Error adding to cart:", error.message);
       return rejectWithValue(
         error.response?.data?.message || "Failed to add item"
       );
@@ -65,24 +61,20 @@ export const addToCart = createAsyncThunk(
   }
 );
 
-// Remove item from cart
+// Remove item from cart (Optimized to update UI immediately)
 export const removeFromCart = createAsyncThunk(
   "cart/removeFromCart",
   async (productId: string, { rejectWithValue }) => {
     try {
       const token = getToken();
-      const response = await axios.delete(
-        `${BASE_URL}/cart/remove/${productId}`,
-        {
-          withCredentials: true,
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      return response.data.cart.items;
+      await axios.delete(`${BASE_URL}/cart/remove/${productId}`, {
+        withCredentials: true,
+        headers: {
+          Authorization: token,
+        },
+      });
+      return productId; // Return only the productId instead of full cart data
     } catch (error: any) {
-      console.error(" Error removing from cart:", error.message);
       return rejectWithValue(
         error.response?.data?.message || "Failed to remove item"
       );
@@ -104,7 +96,6 @@ export const clearCart = createAsyncThunk(
       });
       return [];
     } catch (error: any) {
-      console.error("Error clearing cart:", error.message);
       return rejectWithValue(
         error.response?.data?.message || "Failed to clear cart"
       );
@@ -118,6 +109,7 @@ const cartSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      // Fetch Cart
       .addCase(fetchCart.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -130,6 +122,8 @@ const cartSlice = createSlice({
         state.loading = false;
         state.error = action.payload as string;
       })
+
+      // Add to Cart
       .addCase(addToCart.pending, (state) => {
         state.loading = true;
       })
@@ -141,17 +135,24 @@ const cartSlice = createSlice({
         state.loading = false;
         state.error = action.payload as string;
       })
+
+      // Remove from Cart - Optimized UI Update
       .addCase(removeFromCart.pending, (state) => {
         state.loading = true;
       })
       .addCase(removeFromCart.fulfilled, (state, action) => {
         state.loading = false;
-        state.items = action.payload;
+        // Remove the item locally
+        state.items = state.items.filter(
+          (item: CartItem) => item.product._id !== action.payload
+        );
       })
       .addCase(removeFromCart.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       })
+
+      // Clear Cart
       .addCase(clearCart.pending, (state) => {
         state.loading = true;
       })
