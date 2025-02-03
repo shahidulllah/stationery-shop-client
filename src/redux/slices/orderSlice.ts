@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CartItem, Order } from "@/types";
+import { ICartItemData, Order } from "@/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -18,7 +18,7 @@ const initialState: OrderState = {
 
 export const placeOrder = createAsyncThunk(
   "orders/placeOrder",
-  async (orderData: CartItem[], { rejectWithValue }) => {
+  async (orderData: ICartItemData[], { rejectWithValue }) => {
     try {
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/orders`, { items: orderData });
       return response.data;

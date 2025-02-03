@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export interface CartItem {
+export interface ICartItemData {
   id: string;
   name: string;
   price: number;
@@ -13,3 +13,29 @@ export interface Order {
   totalAmount: number;
   status: string;
 }
+
+interface Product {
+  _id: string;
+  name: string;
+  brand: string;
+  price: number;
+  category: string;
+  description: string;
+  quantity: number;
+  inStock: boolean;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+interface CartItem {
+  product: Product;
+  quantity: number;
+}
+
+export interface CartState {
+  items: CartItem[];
+  loading: boolean;
+  error: string | null;
+}
+
