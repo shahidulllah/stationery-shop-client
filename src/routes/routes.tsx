@@ -13,6 +13,10 @@ import AdminDashboard from "@/pages/dashboard/admin/AdminDashboard";
 import UserDashboard from "@/pages/dashboard/user/UserDashboard";
 import UserRoute from "./UserRoute";
 import AdminRoute from "./AdminRoute";
+import Profile from "@/pages/dashboard/user/UserProfile";
+import UserOrders from "@/pages/dashboard/user/UserOrders";
+import ManageProducts from "@/pages/dashboard/admin/ManageProducts";
+import ManageOrders from "@/pages/dashboard/admin/ManageOrders";
 
 export const router = createBrowserRouter([
   {
@@ -34,7 +38,7 @@ export const router = createBrowserRouter([
   // User Dashboard (Protected)
   {
     path: "/dashboard/user",
-    element: <UserRoute />, 
+    element: <UserRoute />,
     children: [
       { index: true, element: <UserDashboard /> },
       { path: "profile", element: <Profile /> },
@@ -45,7 +49,7 @@ export const router = createBrowserRouter([
   // Admin Dashboard (Protected)
   {
     path: "/dashboard/admin",
-    element: <AdminRoute />, 
+    element: <AdminRoute />,
     children: [
       { index: true, element: <AdminDashboard /> },
       { path: "manage-products", element: <ManageProducts /> },
