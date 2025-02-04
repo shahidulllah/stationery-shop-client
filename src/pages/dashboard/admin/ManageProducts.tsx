@@ -1,15 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/redux/store";
 import { deleteProduct, fetchProducts } from "@/redux/slices/productSlice";
 import { toast } from "sonner";
+import EditProductModal from "../utils/EditProductModal";
+import { Product } from "@/types";
 
 const ManageProducts = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
   const dispatch = useDispatch<AppDispatch>();
   const { products, status, error } = useSelector(
     (state: RootState) => state.products
   );
-  console.log(products);
+
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
@@ -34,6 +39,13 @@ const ManageProducts = () => {
 
   return (
     <div className="max-w-5xl mx-auto">
+      {isModalOpen && (
+        <EditProductModal
+          product={selectedProduct}
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
       <h2 className="text-2xl font-bold mb-4">Manage Products</h2>
       <table className="w-full border-collapse border border-gray-300 text-center ">
         <thead>
@@ -51,7 +63,10 @@ const ManageProducts = () => {
               <td className="border p-2">
                 <button
                   className="bg-blue-500 text-white px-3 py-1 mr-2 rounded"
-                  onClick={() => console.log("Edit product", product._id)}
+                  onClick={() => {
+                    setSelectedProduct(product);
+                    setIsModalOpen(true);
+                  }}
                 >
                   Edit
                 </button>
