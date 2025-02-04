@@ -23,13 +23,23 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const data = await loginUser(formData);
-      dispatch(setUser({ user: data.data.user, token: data.data.token }))
+      const response = await loginUser(formData); 
+      const { user, token } = response.data;
+      console.log("user:", user, "token:", token); 
+      dispatch(setUser({ user, token })); 
+  
       toast.success("Login successful!");
       navigate("/");
+  
+      // // Redirect based on role
+      // if (user.role === "admin") {
+      //   navigate("/dashboard/admin");
+      // } else {
+      //   navigate("/dashboard/user");
+      // }
     } catch (error) {
       console.log(error);
-      toast.error("Login failed!");
+      toast.error("Login failed! Check your credentials.");
     }
   };
 
@@ -97,7 +107,7 @@ export default function LoginPage() {
                   required
                 />
                 <button
-                  type="submit"
+                  type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
                 >
@@ -121,7 +131,7 @@ export default function LoginPage() {
               <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors">
                 Don't have an account?{" "}
                 <Link
-                  to="/auth/signup"
+                  to="/register"
                   className="text-[#0AE08F] hover:underline transition-colors"
                 >
                   Sign Up
