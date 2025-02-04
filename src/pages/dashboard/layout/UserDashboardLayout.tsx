@@ -1,4 +1,4 @@
-const UserDashboard = () => {
+const UserDashboardLayout = () => {
     return (
       <div>
         <h1 className="text-2xl font-bold">User Dashboard</h1>
@@ -8,5 +8,5 @@ const UserDashboard = () => {
     );
   };
   
-  export default UserDashboard;
+  export default UserDashboardLayout;
   

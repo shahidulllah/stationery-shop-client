@@ -9,14 +9,14 @@ import ProductDetails from "@/pages/productPage/ProductDetails";
 import Cart from "@/pages/cart/Cart";
 import Checkout from "@/pages/checkout/Checkout";
 import Orders from "@/pages/orderPage/Orders";
-import AdminDashboard from "@/pages/dashboard/admin/AdminDashboard";
-import UserDashboard from "@/pages/dashboard/user/UserDashboard";
 import UserRoute from "./UserRoute";
 import AdminRoute from "./AdminRoute";
 import Profile from "@/pages/dashboard/user/UserProfile";
 import UserOrders from "@/pages/dashboard/user/UserOrders";
 import ManageProducts from "@/pages/dashboard/admin/ManageProducts";
 import ManageOrders from "@/pages/dashboard/admin/ManageOrders";
+import AdminDashboardLayout from "@/pages/dashboard/layout/AdminDashboardLayout";
+import UserDashboardLayout from "@/pages/dashboard/layout/UserDashboardLayout";
 
 export const router = createBrowserRouter([
   {
@@ -40,7 +40,7 @@ export const router = createBrowserRouter([
     path: "/dashboard/user",
     element: <UserRoute />,
     children: [
-      { index: true, element: <UserDashboard /> },
+      { index: true, element: <UserDashboardLayout /> },
       { path: "profile", element: <Profile /> },
       { path: "orders", element: <UserOrders /> },
     ],
@@ -52,7 +52,7 @@ export const router = createBrowserRouter([
     element: <AdminRoute />,
     children: [
       {
-        element: <AdminDashboard />,
+        element: <AdminDashboardLayout />,
         children: [
           { index: true, element: <h2>Welcome to Admin Dashboard</h2> },
           { path: "manage-products", element: <ManageProducts /> },

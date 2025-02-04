@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { Package, ShoppingCart, Users } from "lucide-react";
 
-const AdminLayout = () => {
+const AdminDashboardLayout = () => {
   return (
     <div className="flex min-h-screen">
       {/* Sidebar */}
@@ -49,4 +49,4 @@ const AdminLayout = () => {
   );
 };
 
-export default AdminLayout;
+export default AdminDashboardLayout;
