@@ -51,9 +51,14 @@ export const router = createBrowserRouter([
     path: "/dashboard/admin",
     element: <AdminRoute />,
     children: [
-      { index: true, element: <AdminDashboard /> },
-      { path: "manage-products", element: <ManageProducts /> },
-      { path: "manage-orders", element: <ManageOrders /> },
+      {
+        element: <AdminDashboard />,
+        children: [
+          { index: true, element: <h2>Welcome to Admin Dashboard</h2> },
+          { path: "manage-products", element: <ManageProducts /> },
+          { path: "manage-orders", element: <ManageOrders /> },
+        ],
+      },
     ],
   },
 ]);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Product } from "@/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -19,6 +20,7 @@ const initialState: ProductState = {
   error: null,
 };
 
+// Fetch all products
 export const fetchProducts = createAsyncThunk<Product[]>(
   "products/fetchProducts",
   async () => {
@@ -27,11 +29,48 @@ export const fetchProducts = createAsyncThunk<Product[]>(
   }
 );
 
+// Fetch product by ID
 export const fetchProductById = createAsyncThunk<Product, string>(
   "products/fetchProductById",
   async (id: string) => {
     const response = await axios.get(`${BASE_URL}/products/${id}`);
     return response.data.data;
+  }
+);
+
+// Delete product
+export const deleteProduct = createAsyncThunk<string, string>(
+  "products/deleteProduct",
+  async (id: string, { rejectWithValue }) => {
+    try {
+      await axios.delete(`${BASE_URL}/products/${id}`);
+      return id; 
+    } catch (error: any) {
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to delete product"
+      );
+    }
+  }
+);
+
+// Update product
+export const updateProduct = createAsyncThunk<
+  Product,
+  { id: string; updatedData: Partial<Product> }
+>(
+  "products/updateProduct",
+  async ({ id, updatedData }, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(
+        `${BASE_URL}/products/${id}`,
+        updatedData
+      );
+      return response.data.data;
+    } catch (error: any) {
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to update product"
+      );
+    }
   }
 );
 
@@ -41,6 +80,7 @@ const productSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      // Fetch all products
       .addCase(fetchProducts.pending, (state) => {
         state.status = "loading";
       })
@@ -53,7 +93,7 @@ const productSlice = createSlice({
         state.error = action.error.message ?? "An unknown error occurred";
       })
 
-      //Product Details
+      // Fetch product by ID
       .addCase(fetchProductById.pending, (state) => {
         state.status = "loading";
       })
@@ -64,6 +104,36 @@ const productSlice = createSlice({
       .addCase(fetchProductById.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "An unknown error occurred";
+      })
+
+      // Delete product
+      .addCase(deleteProduct.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.products = state.products.filter(
+          (product) => product._id !== action.payload
+        );
+      })
+      .addCase(deleteProduct.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload as string;
+      })
+
+      // Update product
+      .addCase(updateProduct.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.products = state.products.map((product) =>
+          product._id === action.payload._id ? action.payload : product
+        );
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload as string;
       });
   },
 });

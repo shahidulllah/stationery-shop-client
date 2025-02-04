@@ -9,7 +9,7 @@ const AdminLayout = () => {
         <h2 className="text-xl font-bold mb-5">Admin Dashboard</h2>
         <nav className="space-y-4">
           <NavLink
-            to="products"
+            to="manage-products"
             className={({ isActive }) =>
               `flex items-center gap-2 p-2 rounded ${
                 isActive ? "bg-gray-700" : "hover:bg-gray-700"
@@ -19,7 +19,7 @@ const AdminLayout = () => {
             <Package size={18} /> Manage Products
           </NavLink>
           <NavLink
-            to="orders"
+            to="manage-orders"
             className={({ isActive }) =>
               `flex items-center gap-2 p-2 rounded ${
                 isActive ? "bg-gray-700" : "hover:bg-gray-700"
