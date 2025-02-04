@@ -20,6 +20,21 @@ const initialState: ProductState = {
   error: null,
 };
 
+// Create new product
+export const createProduct = createAsyncThunk<Product, Product>(
+  "products/createProduct",
+  async (newProduct: Product, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`${BASE_URL}/products`, newProduct);
+      return response.data.data;
+    } catch (error: any) {
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to create product"
+      );
+    }
+  }
+);
+
 // Fetch all products
 export const fetchProducts = createAsyncThunk<Product[]>(
   "products/fetchProducts",
@@ -44,7 +59,7 @@ export const deleteProduct = createAsyncThunk<string, string>(
   async (id: string, { rejectWithValue }) => {
     try {
       await axios.delete(`${BASE_URL}/products/${id}`);
-      return id; 
+      return id;
     } catch (error: any) {
       return rejectWithValue(
         error.response?.data?.message || "Failed to delete product"
@@ -80,6 +95,19 @@ const productSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      // Create product
+      .addCase(createProduct.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(createProduct.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.products.push(action.payload); // Add new product to the list
+      })
+      .addCase(createProduct.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload as string;
+      })
+
       // Fetch all products
       .addCase(fetchProducts.pending, (state) => {
         state.status = "loading";
