@@ -14,6 +14,18 @@ export interface Order {
   status: string;
 }
 
+export interface IOrder {
+  _id: string;
+  email: string;
+  product: string;
+  quantity: number;
+  totalPrice: number;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  status?: string; 
+}
+
 export interface Product {
   _id: string;
   name: string;
