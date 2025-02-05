@@ -49,7 +49,7 @@ const ManageOrders = () => {
               <td className="border p-2">${order.totalPrice}</td>
               <td className="border p-2">{order.status}</td>
               <td className="border p-2">
-                {order.status === "pending" && (
+                {order.status === "Pending" && (
                   <>
                     <button
                       className="bg-green-500 text-white px-3 py-1 mr-2 rounded"
