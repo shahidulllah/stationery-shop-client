@@ -10,6 +10,7 @@ const ManageOrders = () => {
     (state: RootState) => state.orders
   );
 
+  console.log(orders);
   useEffect(() => {
     dispatch(fetchOrders());
   }, [dispatch]);
@@ -46,9 +47,9 @@ const ManageOrders = () => {
               <td className="border p-2">{order._id}</td>
               <td className="border p-2">{order.email}</td>
               <td className="border p-2">${order.totalPrice}</td>
-              <td className="border p-2">{order.status || "Pending"}</td>
+              <td className="border p-2">{order.status}</td>
               <td className="border p-2">
-                {order.status === "Pending" && (
+                {order.status === "pending" && (
                   <>
                     <button
                       className="bg-green-500 text-white px-3 py-1 mr-2 rounded"

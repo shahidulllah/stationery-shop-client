@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IOrder } from "@/types";
+import { ICartItemData, IOrder } from "@/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -16,6 +16,21 @@ const initialState: OrderState = {
   error: null,
 };
 
+export const placeOrder = createAsyncThunk(
+  "orders/placeOrder",
+  async (orderData: ICartItemData[], { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/orders`,
+        { items: orderData }
+      );
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data || "Order failed");
+    }
+  }
+);
+
 // Fetch all orders
 export const fetchOrders = createAsyncThunk(
   "orders/fetchOrders",
@@ -24,7 +39,7 @@ export const fetchOrders = createAsyncThunk(
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/orders`
       );
-      return response.data;
+      return response.data.data;
     } catch (error: any) {
       return rejectWithValue(error.response?.data || "Failed to fetch orders");
     }
@@ -58,6 +73,17 @@ const orderSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(placeOrder.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(placeOrder.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.orders.push(action.payload);
+      })
+      .addCase(placeOrder.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message ?? "Failed to fetch orders";
+      })
       // Fetch Orders
       .addCase(fetchOrders.pending, (state) => {
         state.status = "loading";

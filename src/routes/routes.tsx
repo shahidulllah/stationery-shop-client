@@ -7,7 +7,7 @@ import RegisterPage from "@/pages/registerPage/Register";
 import AllProducts from "@/pages/productPage/AllProducts";
 import ProductDetails from "@/pages/productPage/ProductDetails";
 import Cart from "@/pages/cart/Cart";
-import Checkout from "@/pages/checkout/Checkout";
+// import Checkout from "@/pages/checkout/Checkout";
 import Orders from "@/pages/orderPage/Orders";
 import UserRoute from "./UserRoute";
 import AdminRoute from "./AdminRoute";
@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
       { path: "products", element: <AllProducts /> },
       { path: "products/:id", element: <ProductDetails /> },
       { path: "cart", element: <Cart /> },
-      { path: "checkout", element: <Checkout /> },
+      // { path: "checkout", element: <Checkout /> },
       { path: "orders", element: <Orders /> },
       { path: "about", element: <About /> },
     ],
