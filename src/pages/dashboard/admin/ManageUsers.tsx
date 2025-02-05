@@ -5,26 +5,37 @@ import { fetchUsers, deleteUser } from "@/redux/slices/userSlice";
 import { toast } from "sonner";
 import EditUserModal from "../utils/EditUserModal";
 
+type User = {
+  _id: string;
+  name: string;
+  email: string;
+  role: "user" | "admin";
+};
 
 const ManageUsers = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { users, status, error } = useSelector((state: RootState) => state.users);
+  const { users, status, error } = useSelector(
+    (state: RootState) => state.users
+  );
+
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
 
   const handleDelete = async (id: string) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this user?");
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this user?"
+    );
     if (!confirmDelete) return;
 
     try {
       await dispatch(deleteUser(id));
       toast.success("User deleted successfully");
     } catch (error) {
-        console.log(error);
+      console.log(error);
       toast.error("Failed to delete user");
     }
   };
@@ -34,8 +45,11 @@ const ManageUsers = () => {
 
   return (
     <div className="max-w-5xl mx-auto">
-      {isModalOpen && (
-        <EditUserModal user={selectedUser} onClose={() => setIsModalOpen(false)} />
+      {isModalOpen && selectedUser && (
+        <EditUserModal
+          user={selectedUser}
+          onClose={() => setIsModalOpen(false)}
+        />
       )}
       <h2 className="text-2xl font-bold mb-4">Manage Users</h2>
       <table className="w-full border-collapse border border-gray-300 text-center">
@@ -48,7 +62,7 @@ const ManageUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
+          {users.map((user: User) => (
             <tr key={user._id} className="border">
               <td className="border p-2">{user.name}</td>
               <td className="border p-2">{user.email}</td>

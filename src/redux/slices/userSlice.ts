@@ -5,6 +5,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 type User = {
   _id: string;
+  name: string;
   role: "user" | "admin";
   email: string; 
 };
