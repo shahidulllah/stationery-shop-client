@@ -1,58 +1,88 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
-  const response = await axios.get("/api/users");
-  return response.data;
-});
+type User = {
+  _id: string;
+  role: "user" | "admin";
+  email: string; 
+};
 
-export const updateUserRole = createAsyncThunk(
-  "users/updateUserRole",
-  async ({ userId, role }: { userId: string; role: string }) => {
-    const response = await axios.put(`${BASE_URL}/users/${userId}/role`, {
-      role,
-    });
+interface UserState {
+  users: User[];
+  status: "idle" | "loading" | "succeeded" | "failed";
+  error: string | null;
+}
+
+const initialState: UserState = {
+  users: [],
+  status: "idle",
+  error: null,
+};
+
+// Fetch all users
+export const fetchUsers = createAsyncThunk<User[]>(
+  "users/fetchUsers",
+  async () => {
+    const response = await axios.get(`${BASE_URL}/users`);
     return response.data;
   }
 );
 
-export const deleteUser = createAsyncThunk(
+// Update user role
+export const updateUserRole = createAsyncThunk<
+  User,
+  { userId: string; role: User["role"] }
+>("users/updateUserRole", async ({ userId, role }) => {
+  const response = await axios.put(`${BASE_URL}/users/${userId}/role`, {
+    role,
+  });
+  return response.data;
+});
+
+// Delete user
+export const deleteUser = createAsyncThunk<string, string>(
   "users/deleteUser",
-  async (userId: string) => {
+  async (userId) => {
     await axios.delete(`${BASE_URL}/users/${userId}`);
-    return userId;
+    return userId; 
   }
 );
 
+// User Slice
 const userSlice = createSlice({
   name: "users",
-  initialState: { users: [], status: "idle", error: null },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
+      // Fetch users
       .addCase(fetchUsers.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchUsers.fulfilled, (state, action) => {
+      .addCase(fetchUsers.fulfilled, (state, action: PayloadAction<User[]>) => {
         state.status = "succeeded";
         state.users = action.payload;
       })
       .addCase(fetchUsers.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.error.message;
+        state.error = action.error.message || "Failed to fetch users";
       })
-      //UpdateRole
-      .addCase(updateUserRole.fulfilled, (state, action) => {
-        const index = state.users.findIndex(
-          (user) => user._id === action.payload._id
-        );
-        if (index !== -1) {
-          state.users[index].role = action.payload.role;
+      // Update role
+      .addCase(
+        updateUserRole.fulfilled,
+        (state, action: PayloadAction<User>) => {
+          const index = state.users.findIndex(
+            (user) => user._id === action.payload._id
+          );
+          if (index !== -1) {
+            state.users[index] = action.payload;
+          }
         }
-      })
-      .addCase(deleteUser.fulfilled, (state, action) => {
+      )
+      // Delete user
+      .addCase(deleteUser.fulfilled, (state, action: PayloadAction<string>) => {
         state.users = state.users.filter((user) => user._id !== action.payload);
       });
   },
