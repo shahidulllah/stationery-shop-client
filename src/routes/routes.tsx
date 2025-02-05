@@ -17,6 +17,7 @@ import ManageProducts from "@/pages/dashboard/admin/ManageProducts";
 import ManageOrders from "@/pages/dashboard/admin/ManageOrders";
 import AdminDashboardLayout from "@/pages/dashboard/layout/AdminDashboardLayout";
 import UserDashboardLayout from "@/pages/dashboard/layout/UserDashboardLayout";
+import ManageUsers from "@/pages/dashboard/admin/ManageUsers";
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +58,7 @@ export const router = createBrowserRouter([
           { index: true, element: <h2>Welcome to Admin Dashboard</h2> },
           { path: "manage-products", element: <ManageProducts /> },
           { path: "manage-orders", element: <ManageOrders /> },
+          { path: "manage-users", element: <ManageUsers /> },
         ],
       },
     ],

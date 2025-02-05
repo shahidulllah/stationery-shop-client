@@ -29,7 +29,7 @@ const AdminDashboardLayout = () => {
             <ShoppingCart size={18} /> Manage Orders
           </NavLink>
           <NavLink
-            to="users"
+            to="manage-users"
             className={({ isActive }) =>
               `flex items-center gap-2 p-2 rounded ${
                 isActive ? "bg-gray-700" : "hover:bg-gray-700"
