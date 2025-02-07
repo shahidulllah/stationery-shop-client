@@ -9,7 +9,7 @@ const UserDashboardLayout = () => {
         <h2 className="text-xl font-bold mb-5">User Dashboard</h2>
         <nav className="space-y-4">
           <NavLink
-            to="my-orders"
+            to="orders"
             className={({ isActive }) =>
               `flex items-center gap-2 p-2 rounded ${
                 isActive ? "bg-gray-700" : "hover:bg-gray-700"
