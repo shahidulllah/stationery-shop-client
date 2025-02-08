@@ -23,14 +23,14 @@ const Cart = () => {
       <h2 className="text-2xl font-bold mb-4">Shopping Cart</h2>
       {cartItems.map((item) => (
         <div
-          key={item.product._id}
+          key={item?.product?._id}
           className="flex justify-between items-center p-2 border-b"
         >
           <span className="text-lg">
-            {item.product.name} - {item.quantity}
+            {item?.product?.name} - {item?.quantity}
           </span>
           <button
-            onClick={() => dispatch(removeFromCart(item.product._id))}
+            onClick={() => dispatch(removeFromCart(item?.product?._id))}
             className="text-red-500 px-2 py-1 rounded border border-red-500 hover:bg-red-500 hover:text-white"
           >
             Remove
