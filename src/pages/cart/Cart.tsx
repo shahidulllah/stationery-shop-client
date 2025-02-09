@@ -2,10 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { useEffect } from "react";
 import { clearCart, fetchCart, removeFromCart } from "@/redux/slices/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const dispatch = useDispatch<AppDispatch>();
   const cartItems = useSelector((state: RootState) => state.cart.items);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchCart());
@@ -17,6 +19,11 @@ const Cart = () => {
         Your cart is empty...
       </p>
     );
+
+  const totalAmount = cartItems.reduce(
+    (sum, item) => sum + item.product.price * item.quantity,
+    0
+  );
 
   return (
     <div className="my-4 max-w-3xl mx-auto">
@@ -37,6 +44,15 @@ const Cart = () => {
           </button>
         </div>
       ))}
+      <div className="text-lg font-semibold mt-4">
+        Total: ${totalAmount.toFixed(2)}
+      </div>
+      <button
+        onClick={() => navigate("/checkout")}
+        className="bg-blue-500 text-white px-4 py-2 rounded mt-4 w-full"
+      >
+        Proceed to Checkout
+      </button>
       <button
         onClick={() => dispatch(clearCart())}
         className="bg-red-500 text-white px-4 py-2 rounded mt-4 w-full"
