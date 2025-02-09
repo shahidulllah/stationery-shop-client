@@ -73,7 +73,7 @@ export const removeFromCart = createAsyncThunk(
           Authorization: token,
         },
       });
-      return productId; // Return only the productId instead of full cart data
+      return productId; 
     } catch (error: any) {
       return rejectWithValue(
         error.response?.data?.message || "Failed to remove item"

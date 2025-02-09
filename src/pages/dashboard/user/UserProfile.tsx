@@ -32,7 +32,6 @@ const UserProfile = () => {
             type="email"
             className="w-full p-2 border rounded"
             value={""}
-            disabled
           />
         </div>
         <button

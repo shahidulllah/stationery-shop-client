@@ -5,6 +5,7 @@ import axios from "axios";
 
 interface OrderState {
   orders: IOrder[];
+  order: IOrder | null; 
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
@@ -12,21 +13,57 @@ interface OrderState {
 // Initial state
 const initialState: OrderState = {
   orders: [],
+  order: null, 
   status: "idle",
   error: null,
 };
 
+// Place Order (Including Payment Data)
 export const placeOrder = createAsyncThunk(
   "orders/placeOrder",
-  async (orderData: ICartItemData[], { rejectWithValue }) => {
+  async (
+    {
+      userId,
+      cartItems,
+      totalAmount,
+      paymentIntentId,
+    }: {
+      userId: string;
+      cartItems: ICartItemData[];
+      totalAmount: number;
+      paymentIntentId: string;
+    },
+    { rejectWithValue }
+  ) => {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/orders`,
-        { items: orderData }
+        {
+          userId,
+          items: cartItems,
+          totalAmount,
+          paymentStatus: "Paid", 
+          paymentIntentId, 
+        }
       );
       return response.data;
     } catch (error: any) {
-      return rejectWithValue(error.response?.data || "Order failed");
+      return rejectWithValue(error.response?.data || "Order placement failed");
+    }
+  }
+);
+
+// ✅ Fetch a Single Order by ID
+export const fetchOrder = createAsyncThunk(
+  "orders/fetchOrder",
+  async (orderId: string, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/orders/${orderId}`
+      );
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data || "Failed to fetch order");
     }
   }
 );
@@ -73,18 +110,34 @@ const orderSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      // Handle Place Order
       .addCase(placeOrder.pending, (state) => {
         state.status = "loading";
       })
       .addCase(placeOrder.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.orders.push(action.payload);
+        state.order = action.payload; 
       })
       .addCase(placeOrder.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.error.message ?? "Failed to fetch orders";
+        state.error = action.error.message ?? "Order placement failed";
       })
-      // Fetch Orders
+
+      // Handle Fetch Single Order
+      .addCase(fetchOrder.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchOrder.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.order = action.payload; 
+      })
+      .addCase(fetchOrder.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload as string;
+      })
+
+      // Handle Fetch All Orders
       .addCase(fetchOrders.pending, (state) => {
         state.status = "loading";
       })
@@ -97,7 +150,7 @@ const orderSlice = createSlice({
         state.error = action.payload as string;
       })
 
-      // Update Order Status
+      // Handle Update Order Status
       .addCase(updateOrderStatus.pending, (state) => {
         state.status = "loading";
       })
@@ -109,6 +162,9 @@ const orderSlice = createSlice({
         );
         if (index !== -1) {
           state.orders[index] = updatedOrder;
+        }
+        if (state.order?._id === updatedOrder._id) {
+          state.order = updatedOrder;
         }
       })
       .addCase(updateOrderStatus.rejected, (state, action) => {

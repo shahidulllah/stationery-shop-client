@@ -7,7 +7,7 @@ import RegisterPage from "@/pages/registerPage/Register";
 import AllProducts from "@/pages/productPage/AllProducts";
 import ProductDetails from "@/pages/productPage/ProductDetails";
 import Cart from "@/pages/cart/Cart";
-import Orders from "@/pages/orderPage/Orders";
+// import Orders from "@/pages/orderPage/Orders";
 import UserRoute from "./UserRoute";
 import AdminRoute from "./AdminRoute";
 import Profile from "@/pages/dashboard/user/UserProfile";
@@ -18,6 +18,7 @@ import AdminDashboardLayout from "@/pages/dashboard/layout/AdminDashboardLayout"
 import UserDashboardLayout from "@/pages/dashboard/layout/UserDashboardLayout";
 import ManageUsers from "@/pages/dashboard/admin/ManageUsers";
 import Checkout from "@/pages/checkout/Checkout";
+import OrderConfirmation from "@/pages/orderPage/OrderConfirmation";
 
 export const router = createBrowserRouter([
   {
@@ -29,7 +30,8 @@ export const router = createBrowserRouter([
       { path: "products/:id", element: <ProductDetails /> },
       { path: "cart", element: <Cart /> },
       { path: "checkout", element: <Checkout /> },
-      { path: "orders", element: <Orders /> },
+      // { path: "orders", element: <Orders /> },
+      { path: "order-confirmation/:id", element: <OrderConfirmation /> },
       { path: "about", element: <About /> },
     ],
   },

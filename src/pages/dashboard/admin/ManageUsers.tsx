@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/redux/store";
 import { fetchUsers, deleteUser } from "@/redux/slices/userSlice";
 import { toast } from "sonner";
-import EditUserModal from "../utils/EditUserModal";
+import EditUserModal from "../../cart/utils/EditUserModal";
 
 type User = {
   _id: string;

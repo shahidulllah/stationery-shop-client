@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/redux/store";
 import { deleteProduct, fetchProducts } from "@/redux/slices/productSlice";
 import { toast } from "sonner";
-import EditProductModal from "../utils/EditProductModal";
+import EditProductModal from "../../cart/utils/EditProductModal";
 import { Product } from "@/types";
 
 const ManageProducts = () => {

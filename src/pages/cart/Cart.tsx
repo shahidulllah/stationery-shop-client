@@ -8,6 +8,7 @@ const Cart = () => {
   const dispatch = useDispatch<AppDispatch>();
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const navigate = useNavigate();
+  console.log(cartItems);
 
   useEffect(() => {
     dispatch(fetchCart());
