@@ -7,7 +7,6 @@ import RegisterPage from "@/pages/registerPage/Register";
 import AllProducts from "@/pages/productPage/AllProducts";
 import ProductDetails from "@/pages/productPage/ProductDetails";
 import Cart from "@/pages/cart/Cart";
-// import Orders from "@/pages/orderPage/Orders";
 import UserRoute from "./UserRoute";
 import AdminRoute from "./AdminRoute";
 import Profile from "@/pages/dashboard/user/UserProfile";
@@ -30,7 +29,6 @@ export const router = createBrowserRouter([
       { path: "products/:id", element: <ProductDetails /> },
       { path: "cart", element: <Cart /> },
       { path: "checkout", element: <Checkout /> },
-      // { path: "orders", element: <Orders /> },
       { path: "order-confirmation/:id", element: <OrderConfirmation /> },
       { path: "about", element: <About /> },
     ],

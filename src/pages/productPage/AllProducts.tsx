@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { fetchProducts } from "@/redux/slices/productSlice";
-import { toast } from "sonner";
-import { addToCart } from "@/redux/slices/cartSlice";
 import { Link } from "react-router-dom";
 
 const AllProducts = () => {
@@ -37,16 +35,6 @@ const AllProducts = () => {
 
     return matchesSearch && matchesCategory && matchesPrice;
   });
-
-  const handleAddToCart = async (productId: string) => {
-    try {
-      dispatch(addToCart({ productId, quantity: 1 }));
-      toast.success("Product added to cart!");
-    } catch (error) {
-      console.log(error);
-      toast.error("Failed to add product to cart!");
-    }
-  };
 
   if (status === "loading")
     return <p className="text-black dark:text-white">Loading products...</p>;
@@ -120,12 +108,6 @@ const AllProducts = () => {
                 >
                   View Details
                 </Link>
-                <button
-                  onClick={() => handleAddToCart(product._id)}
-                  className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-                >
-                  Add to Cart
-                </button>
               </div>
             </div>
           ))
