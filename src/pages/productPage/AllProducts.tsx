@@ -19,7 +19,7 @@ const AllProducts = () => {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(1000);
 
-  // Fetch products 
+  // Fetch products
   useEffect(() => {
     dispatch(fetchProducts() as any);
   }, [dispatch]);
@@ -54,19 +54,19 @@ const AllProducts = () => {
     return <p className="text-black dark:text-white">Error: {error}</p>;
 
   return (
-    <div className="max-w-7xl mx-auto p-4 my-24">
+    <div className="max-w-7xl mx-auto p-4 my-24 bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       {/* Search and Filter Section */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
         <input
           type="text"
           placeholder="Search by name or category"
-          className="border px-4 py-2 w-full md:w-1/3 rounded"
+          className="border px-4 py-2 w-full md:w-1/3 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
 
         <select
-          className="border px-4 py-2 rounded w-full md:w-1/4"
+          className="border px-4 py-2 rounded w-full md:w-1/4 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white"
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
         >
@@ -83,14 +83,14 @@ const AllProducts = () => {
           <input
             type="number"
             placeholder="Min"
-            className="border px-2 py-1 w-20 rounded"
+            className="border px-2 py-1 w-20 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white"
             value={minPrice}
             onChange={(e) => setMinPrice(Number(e.target.value))}
           />
           <input
             type="number"
             placeholder="Max"
-            className="border px-2 py-1 w-20 rounded"
+            className="border px-2 py-1 w-20 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white"
             value={maxPrice}
             onChange={(e) => setMaxPrice(Number(e.target.value))}
           />
@@ -103,22 +103,26 @@ const AllProducts = () => {
           filteredProducts.map((product) => (
             <div
               key={product._id}
-              className="border p-4 rounded-md shadow hover:shadow-lg transition"
+              className="border p-4 rounded-md shadow hover:shadow-lg transition bg-gray-100 dark:bg-gray-800"
             >
               <h2 className="text-xl font-bold mb-2">{product.name}</h2>
-              <p className="text-gray-700">${product.price}</p>
-              <p className="text-sm text-gray-500">{product.category}</p>
+              <p className="text-gray-700 dark:text-gray-300">
+                ${product.price}
+              </p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {product.category}
+              </p>
 
               <div className="flex justify-between items-center mt-4">
                 <Link
                   to={`/products/${product._id}`}
-                  className="text-blue-500 underline"
+                  className="text-blue-500 dark:text-blue-300 underline"
                 >
                   View Details
                 </Link>
                 <button
                   onClick={() => handleAddToCart(product._id)}
-                  className="bg-green-500 text-white px-4 py-2 rounded"
+                  className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
                 >
                   Add to Cart
                 </button>
@@ -126,7 +130,7 @@ const AllProducts = () => {
             </div>
           ))
         ) : (
-          <p className="col-span-full text-center text-gray-500">
+          <p className="col-span-full text-center text-gray-500 dark:text-gray-400">
             No products found.
           </p>
         )}

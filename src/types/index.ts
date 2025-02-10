@@ -34,6 +34,7 @@ export interface Product {
   description: string;
   quantity: number;
   inStock: boolean;
+  image: string;
   createdAt: string;
   updatedAt: string;
   __v: number;
