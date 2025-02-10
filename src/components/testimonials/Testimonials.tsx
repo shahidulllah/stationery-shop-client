@@ -4,8 +4,10 @@ const Testimonials = () => {
   return (
     <>
       {/* Testimonials Section */}
-      <section className="mb-12 max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold mb-6">What Our Customers Say</h2>
+      <section className="mb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-2xl text-green-500 dark:text-green-300 md:text-3xl font-bold mb-6">
+          What Our Customers Say
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Testimonial 1 */}
           <div className="border p-6 rounded-md shadow bg-gray-100 dark:bg-gray-800">
@@ -36,8 +38,8 @@ const Testimonials = () => {
       </section>
 
       {/* Blog Section */}
-      <section className="mb-12 max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold mb-6">Latest Blogs</h2>
+      <section className="mb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-2xl md:text-3xl text-green-500 dark:text-green-300 font-bold mb-6">Latest Blogs</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Blog 1 */}
           <div className="border p-6 rounded-md shadow bg-gray-100 dark:bg-gray-800">
