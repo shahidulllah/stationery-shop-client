@@ -44,7 +44,7 @@ export const router = createBrowserRouter([
       {
         element: <UserDashboardLayout />,
         children: [
-          { index: true, element: <h2>Welcome to User Dashboard</h2> },
+          { index: true, element: <><UserOrders/></> },
           { path: "orders", element: <UserOrders /> },
           { path: "profile", element: <Profile /> },
         ],
@@ -60,7 +60,7 @@ export const router = createBrowserRouter([
       {
         element: <AdminDashboardLayout />,
         children: [
-          { index: true, element: <h2>Welcome to Admin Dashboard</h2> },
+          { index: true, element: <><ManageProducts/></> },
           { path: "manage-products", element: <ManageProducts /> },
           { path: "manage-orders", element: <ManageOrders /> },
           { path: "manage-users", element: <ManageUsers /> },

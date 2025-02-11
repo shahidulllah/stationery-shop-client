@@ -11,7 +11,6 @@ const UserDashboardLayout = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate("/");
   };
 
   return (
