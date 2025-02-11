@@ -1,10 +1,18 @@
 import { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { ShoppingCart, User, LogOut, ArrowLeft, Menu } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { logout } from "@/redux/slices/authSlice";
 
 const UserDashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+  };
 
   return (
     <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -66,7 +74,10 @@ const UserDashboardLayout = () => {
 
         {/* Logout Button */}
         <div className="absolute bottom-5 left-5 right-5">
-          <button className="w-full flex items-center gap-3 p-3 bg-green-900 hover:bg-green-700 text-white rounded">
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center gap-3 p-3 bg-green-900 hover:bg-green-700 text-white rounded"
+          >
             <LogOut size={20} /> Logout
           </button>
         </div>
