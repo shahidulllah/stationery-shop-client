@@ -3,6 +3,17 @@ import { Link } from "react-router-dom";
 const Testimonials = () => {
   return (
     <>
+      <section className="text-center py-12 md:py-20 bg-gray-100 dark:bg-gray-800 rounded-lg mb-8 md:mb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">
+            Connect to the Shop with joy
+          </h1>
+          <p className="text-lg text-gray-700 dark:text-gray-300">
+            Your one-stop destination for all your stationery needs.
+          </p>
+        </div>
+
+      </section>
       {/* Testimonials Section */}
       <section className="mb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-2xl text-green-500 dark:text-green-300 md:text-3xl font-bold mb-6">
@@ -39,7 +50,9 @@ const Testimonials = () => {
 
       {/* Blog Section */}
       <section className="mb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl md:text-3xl text-green-500 dark:text-green-300 font-bold mb-6">Latest Blogs</h2>
+        <h2 className="text-2xl md:text-3xl text-green-500 dark:text-green-300 font-bold mb-6">
+          Latest Blogs
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Blog 1 */}
           <div className="border p-6 rounded-md shadow bg-gray-100 dark:bg-gray-800">

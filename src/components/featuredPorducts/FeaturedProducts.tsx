@@ -37,30 +37,41 @@ const FeaturedProducts = () => {
           <h2 className="text-2xl text-green-500 dark:text-green-300 md:text-3xl font-bold mb-8 md:mb-12">
             Featured Products
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredProducts.map((product) => (
-              <div
-                key={product._id}
-                className="border p-4 rounded-md shadow hover:shadow-lg transition bg-gray-100 dark:bg-gray-800"
-              >
-                <h2 className="text-xl font-bold mb-2">{product.name}</h2>
-                <p className="text-gray-700 dark:text-gray-300">
-                  ${product.price}
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  {product.category}
-                </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
+            {
+              featuredProducts.map((product) => (
+                <div
+                  key={product._id}
+                  className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg overflow-hidden transition-transform transform hover:scale-105"
+                >
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-48 object-cover rounded-t-xl"
+                  />
+                  <div className="p-4">
+                    <h2 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
+                      {product.name}
+                    </h2>
+                    <p className="text-gray-700 dark:text-gray-300 text-lg font-semibold">
+                      ${product.price}
+                    </p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {product.category}
+                    </p>
 
-                <div className="flex justify-between items-center mt-4">
-                  <Link
-                    to={`/products/${product._id}`}
-                    className="text-blue-500 dark:text-blue-300 underline"
-                  >
-                    View Details
-                  </Link>
+                    <div className="flex justify-between items-center mt-4">
+                      <Link
+                        to={`/products/${product._id}`}
+                        className="text-blue-600 dark:text-blue-400 font-medium hover:underline"
+                      >
+                        View Details
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+             }
           </div>
           <div className="text-center mt-8 md:mt-12">
             <Link
