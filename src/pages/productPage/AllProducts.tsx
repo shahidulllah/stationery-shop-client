@@ -86,28 +86,37 @@ const AllProducts = () => {
       </div>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-12">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
             <div
               key={product._id}
-              className="border p-4 rounded-md shadow hover:shadow-lg transition bg-gray-100 dark:bg-gray-800"
+              className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg overflow-hidden transition-transform transform hover:scale-105"
             >
-              <h2 className="text-xl font-bold mb-2">{product.name}</h2>
-              <p className="text-gray-700 dark:text-gray-300">
-                ${product.price}
-              </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                {product.category}
-              </p>
+              <img
+                src={product.image}
+                alt={product.name}
+                className="w-full h-48 object-cover rounded-t-xl"
+              />
+              <div className="p-4">
+                <h2 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
+                  {product.name}
+                </h2>
+                <p className="text-gray-700 dark:text-gray-300 text-lg font-semibold">
+                  ${product.price}
+                </p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  {product.category}
+                </p>
 
-              <div className="flex justify-between items-center mt-4">
-                <Link
-                  to={`/products/${product._id}`}
-                  className="text-blue-500 dark:text-blue-300 underline"
-                >
-                  View Details
-                </Link>
+                <div className="flex justify-between items-center mt-4">
+                  <Link
+                    to={`/products/${product._id}`}
+                    className="text-blue-600 dark:text-blue-400 font-medium hover:underline"
+                  >
+                    View Details
+                  </Link>
+                </div>
               </div>
             </div>
           ))

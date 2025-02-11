@@ -30,40 +30,75 @@ const ProductDetails = () => {
 
   if (status === "loading")
     return (
-      <p className="text-center text-gray-700 dark:text-white">
-        Loading product...
-      </p>
+      <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
+        <p className="text-lg text-gray-700 dark:text-white">
+          Loading product...
+        </p>
+      </div>
     );
   if (status === "failed")
     return (
-      <p className="text-center text-red-500 dark:text-red-400">
-        Error: {error}
-      </p>
+      <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
+        <p className="text-lg text-red-500 dark:text-red-400">Error: {error}</p>
+      </div>
     );
 
   return (
-    <div className="min-h-screen py-40 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="max-w-4xl mx-auto  p-6 bg-white dark:bg-gray-800 shadow-lg rounded-lg">
-        {product?.image && (
-          <img
-            src={product?.image}
-            alt={product?.name}
-            className="w-full h-64 object-cover rounded-md"
-          />
-        )}
-        <h1 className="text-3xl font-bold mt-4">{product?.name}</h1>
-        <p className="text-xl font-semibold text-green-600 dark:text-green-400 mt-2">
-          ${product?.price}
-        </p>
-        <p className="mt-4 text-gray-700 dark:text-gray-300">
-          {product?.description}
-        </p>
-        <button
-          onClick={handleAddToCart}
-          className="mt-6 bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition"
-        >
-          Add to Cart
-        </button>
+    <div className="mt-16 min-h-screen py-12 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Product Image */}
+            <div className="flex justify-center items-center p-6 bg-gray-200 dark:bg-gray-700">
+              {product?.image ? (
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full max-h-96 object-cover rounded-lg"
+                />
+              ) : (
+                <p className="text-gray-500 dark:text-gray-400">
+                  No image available
+                </p>
+              )}
+            </div>
+
+            {/* Product Details */}
+            <div className="p-6">
+              <h1 className="text-4xl font-bold mb-4">{product?.name}</h1>
+              <p className="text-2xl font-semibold text-green-600 dark:text-green-400 mb-6">
+                ${product?.price}
+              </p>
+              <p className="text-lg text-gray-700 dark:text-gray-300 mb-8">
+                {product?.description}
+              </p>
+
+              {/* Additional Details */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                <div>
+                  <h3 className="text-xl font-bold mb-2">Category</h3>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    {product?.category}
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-2">Stock</h3>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    {product?.quantity} items available
+                  </p>
+                </div>
+              </div>
+
+              {/* Add to Cart Button */}
+              <button
+                onClick={handleAddToCart}
+                className="w-full bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 shadow-md"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
