@@ -1,20 +1,17 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/redux/store";
-import {
-  deleteProduct,
-  fetchProducts,
-  // addProduct,
-} from "@/redux/slices/productSlice";
+import { deleteProduct, fetchProducts } from "@/redux/slices/productSlice";
 import { toast } from "sonner";
 import EditProductModal from "../../cart/utils/EditProductModal";
 import { Product } from "@/types";
 import { Plus, Trash, Pencil } from "lucide-react";
+import AddProductModal from "@/pages/cart/utils/AddProductModal";
 
 const ManageProducts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  // const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
   const { products, status, error } = useSelector(
@@ -53,11 +50,17 @@ const ManageProducts = () => {
         />
       )}
 
+      {isAddModalOpen && (
+        <AddProductModal
+          isOpen={isAddModalOpen}
+          onClose={() => setIsAddModalOpen(false)}
+        />
+      )}
       <div className="flex max-w-5xl mx-auto justify-between items-center mb-4">
         <h2 className="text-3xl font-bold">Manage Products</h2>
         <button
           className="flex items-center gap-2 bg-green-400 hover:bg-green-500 text-white px-4 py-2 rounded-full"
-          // onClick={() => setIsAddModalOpen(true)}
+          onClick={() => setIsAddModalOpen(true)}
         >
           <Plus size={18} /> Add Product
         </button>
