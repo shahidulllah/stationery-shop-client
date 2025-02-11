@@ -5,7 +5,7 @@ import axios from "axios";
 
 interface OrderState {
   orders: IOrder[];
-  order: IOrder | null; 
+  order: IOrder | null;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
@@ -13,7 +13,7 @@ interface OrderState {
 // Initial state
 const initialState: OrderState = {
   orders: [],
-  order: null, 
+  order: null,
   status: "idle",
   error: null,
 };
@@ -23,14 +23,14 @@ export const placeOrder = createAsyncThunk(
   "orders/placeOrder",
   async (
     {
-      userId,
-      cartItems,
-      totalAmount,
+      email,
+      products,
+      totalPrice,
       paymentIntentId,
     }: {
-      userId: string;
-      cartItems: ICartItemData[];
-      totalAmount: number;
+      email: string;
+      products: ICartItemData[];
+      totalPrice: number;
       paymentIntentId: string;
     },
     { rejectWithValue }
@@ -39,21 +39,21 @@ export const placeOrder = createAsyncThunk(
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/orders`,
         {
-          userId,
-          items: cartItems,
-          totalAmount,
-          paymentStatus: "Paid", 
-          paymentIntentId, 
+          email,
+          products,
+          totalPrice,
+          paymentStatus: "Paid",
+          paymentIntentId,
         }
       );
-      return response.data;
+      return response.data.data;
     } catch (error: any) {
       return rejectWithValue(error.response?.data || "Order placement failed");
     }
   }
 );
 
-// ✅ Fetch a Single Order by ID
+// Fetch a Single Order by ID
 export const fetchOrder = createAsyncThunk(
   "orders/fetchOrder",
   async (orderId: string, { rejectWithValue }) => {
@@ -61,7 +61,7 @@ export const fetchOrder = createAsyncThunk(
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/orders/${orderId}`
       );
-      return response.data;
+      return response.data.data;
     } catch (error: any) {
       return rejectWithValue(error.response?.data || "Failed to fetch order");
     }
@@ -117,7 +117,7 @@ const orderSlice = createSlice({
       .addCase(placeOrder.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.orders.push(action.payload);
-        state.order = action.payload; 
+        state.order = action.payload;
       })
       .addCase(placeOrder.rejected, (state, action) => {
         state.status = "failed";
@@ -130,7 +130,7 @@ const orderSlice = createSlice({
       })
       .addCase(fetchOrder.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.order = action.payload; 
+        state.order = action.payload;
       })
       .addCase(fetchOrder.rejected, (state, action) => {
         state.status = "failed";

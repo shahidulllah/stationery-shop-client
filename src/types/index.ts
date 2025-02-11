@@ -1,28 +1,26 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface ICartItemData {
-  id: string;
+  product: string;
   name: string;
   price: number;
   quantity: number;
 }
 
-export interface Order {
-  id: string;
-  items: any[];
-  totalAmount: number;
-  status: string;
-}
-
 export interface IOrder {
   _id: string;
   email: string;
-  product: string;
-  quantity: number;
+  products: {
+    product: string;
+    name: string;
+    price: number;
+    quantity: number;
+  }[];
   totalPrice: number;
+  paymentStatus: string;
+  paymentIntentId: string;
+  status?: string;
   createdAt: string;
   updatedAt: string;
   __v: number;
-  status?: string; 
 }
 
 export interface Product {
@@ -50,4 +48,3 @@ export interface CartState {
   loading: boolean;
   error: string | null;
 }
-

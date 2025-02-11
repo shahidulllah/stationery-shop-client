@@ -12,7 +12,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const stripePromise = loadStripe(
   import.meta.env.VITE_STRIPE_PUBLIC_KEY as string
@@ -25,7 +24,7 @@ const CheckoutForm = () => {
   const navigate = useNavigate();
 
   const cartItems = useSelector((state: RootState) => state.cart.items);
-  const userId = useSelector((state: RootState) => state.auth.user?.id);
+  const user = useSelector((state: RootState) => state.auth.user);
   const [loading, setLoading] = useState(false);
 
   const totalAmount = cartItems.reduce(
@@ -44,7 +43,7 @@ const CheckoutForm = () => {
         body: JSON.stringify({
           amount: totalAmount * 100,
           currency: "usd",
-          userId,
+          userId: user?.id,
         }),
       });
 
@@ -56,30 +55,28 @@ const CheckoutForm = () => {
 
       if (result.error) {
         console.error(result.error.message);
-        toast.error(result.error.message); 
+        toast.error(result.error.message);
       } else {
-        console.log("Payment Successful:", result.paymentIntent);
-
         toast.success("Payment successful! Placing your order...");
 
         // Dispatch order placement
         dispatch(
           placeOrder({
-            userId,
-            cartItems: cartItems.map((item) => ({
-              id: item.product._id,
+            email: user?.email, 
+            products: cartItems.map((item) => ({
+              product: item.product._id,
               name: item.product.name,
               price: item.product.price,
               quantity: item.quantity,
             })),
-            totalAmount,
+            totalPrice: totalAmount, 
             paymentIntentId: result.paymentIntent.id,
           })
         ).then((orderAction) => {
           if (placeOrder.fulfilled.match(orderAction)) {
             toast.success("Order placed successfully!");
-            
             const orderId = orderAction.payload?._id;
+            console.log(orderId);
             if (orderId) {
               navigate(`/order-confirmation/${orderId}`);
             } else {
@@ -96,17 +93,52 @@ const CheckoutForm = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-10 p-6 border rounded">
-      <h2 className="text-2xl font-bold mb-4">Checkout</h2>
-      <p className="text-lg">Total Amount: ${totalAmount.toFixed(2)}</p>
-      <CardElement className="border p-2 rounded" />
-      <button
-        onClick={handlePayment}
-        className="bg-green-500 text-white px-4 py-2 rounded mt-4 w-full"
-        disabled={loading}
-      >
-        {loading ? "Processing..." : "Pay Now"}
-      </button>
+    <div className="max-w-7xl mx-auto my-24 px-4 sm:px-6 lg:px-8">
+      <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+        <h2 className="text-2xl md:text-3xl font-bold mb-8">Checkout</h2>
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-xl font-bold mb-4">Order Summary</h3>
+            {cartItems.map((item) => (
+              <div
+                key={item.product._id}
+                className="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 py-4"
+              >
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    {item.product.name}
+                  </h4>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    Quantity: {item.quantity}
+                  </p>
+                </div>
+                <p className="text-lg font-semibold text-gray-900 dark:text-white">
+                  ${(item.product.price * item.quantity).toFixed(2)}
+                </p>
+              </div>
+            ))}
+            <div className="flex justify-between items-center mt-6">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                Total:
+              </h3>
+              <p className="text-xl font-semibold text-gray-900 dark:text-white">
+                ${totalAmount.toFixed(2)}
+              </p>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-xl font-bold mb-4">Payment Details</h3>
+            <CardElement className="border p-4 rounded-lg" />
+          </div>
+          <button
+            onClick={handlePayment}
+            className="bg-green-600 text-white px-6 py-3 rounded-lg w-full hover:bg-green-700 transition-colors"
+            disabled={loading}
+          >
+            {loading ? "Processing..." : "Pay Now"}
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

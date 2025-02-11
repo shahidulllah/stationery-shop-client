@@ -12,6 +12,7 @@ const Navbar = () => {
   const { theme, setTheme } = useTheme();
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth.user);
+  const cartItems = useSelector((state: RootState) => state.cart.items); // Fetch cart items
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
@@ -27,7 +28,19 @@ const Navbar = () => {
     { label: "Home", href: "/" },
     { label: "All Products", href: "/products" },
     { label: "About", href: "/about" },
-    { label: <ShoppingCart />, href: "/cart" },
+    {
+      label: (
+        <div className="relative">
+          <ShoppingCart />
+          {cartItems.length > 0 && (
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5">
+              {cartItems.length}
+            </span>
+          )}
+        </div>
+      ),
+      href: "/cart",
+    },
   ];
 
   return (
