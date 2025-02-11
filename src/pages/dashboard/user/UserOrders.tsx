@@ -33,14 +33,13 @@ const UserOrders = () => {
     <div className="min-h-screen py-12 px-4 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
       <div className="max-w-5xl mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
         <h2 className="text-3xl font-bold text-center text-green-600 dark:text-green-400 mb-6">
-          📦 My Orders
+           My Orders
         </h2>
 
         {orders.length === 0 ? (
           <p className="text-center text-lg">No orders found.</p>
         ) : (
           <>
-            {/* Scrollable Orders Table */}
             <div className="overflow-x-auto">
               <div className="max-h-96 overflow-y-auto border rounded-lg shadow-md">
                 <table className="w-full border-collapse text-center">
