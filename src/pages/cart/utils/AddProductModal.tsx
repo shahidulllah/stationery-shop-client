@@ -125,8 +125,9 @@ const AddProductModal = ({ isOpen, onClose }: AddProductModalProps) => {
               required
             />
             <input
-              type="file"
+              type="text"
               name="image"
+              placeholder="Image URL"
               onChange={handleChange}
               className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
             />
