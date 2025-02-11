@@ -4,6 +4,14 @@ import { AppDispatch } from "@/redux/store";
 import { createProduct } from "@/redux/slices/productSlice";
 import { toast } from "sonner";
 
+enum ProductCategory {
+    Writing = "Writing",
+    OfficeSupplies = "Office Supplies",
+    ArtSupplies = "Art Supplies",
+    Educational = "Educational",
+    Technology = "Technology",
+  }
+
 interface AddProductModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -15,27 +23,36 @@ const AddProductModal = ({ isOpen, onClose }: AddProductModalProps) => {
     name: "",
     brand: "",
     price: 0,
-    category: "",
+    category: ProductCategory.Writing,
     description: "",
     quantity: 0,
     image: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: name === "price" || name === "quantity" ? Number(value) : value,
     });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await dispatch(createProduct(formData)).unwrap();
+      const productData = {
+        ...formData,
+        inStock: formData.quantity > 0,
+      };
+      await dispatch(createProduct(productData)).unwrap();
       toast.success("Product added successfully");
       onClose();
     } catch (error) {
+      console.log(error);
       toast.error("Failed to add product");
     }
   };
@@ -56,7 +73,7 @@ const AddProductModal = ({ isOpen, onClose }: AddProductModalProps) => {
               placeholder="Name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:placeholder-gray-400"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
               required
             />
             <input
@@ -65,7 +82,7 @@ const AddProductModal = ({ isOpen, onClose }: AddProductModalProps) => {
               placeholder="Brand"
               value={formData.brand}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:placeholder-gray-400"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
               required
             />
             <input
@@ -74,24 +91,28 @@ const AddProductModal = ({ isOpen, onClose }: AddProductModalProps) => {
               placeholder="Price"
               value={formData.price}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:placeholder-gray-400"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
               required
             />
-            <input
-              type="text"
+            <select
               name="category"
-              placeholder="Category"
               value={formData.category}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:placeholder-gray-400"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
               required
-            />
+            >
+              {Object.values(ProductCategory).map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
             <textarea
               name="description"
               placeholder="Description"
               value={formData.description}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:placeholder-gray-400"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
               required
             />
             <input
@@ -100,16 +121,14 @@ const AddProductModal = ({ isOpen, onClose }: AddProductModalProps) => {
               placeholder="Quantity"
               value={formData.quantity}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:placeholder-gray-400"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
               required
             />
             <input
               type="file"
               name="image"
-              placeholder="Image URL"
-              value={formData.image}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:placeholder-gray-400"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
             />
           </div>
 
@@ -117,13 +136,13 @@ const AddProductModal = ({ isOpen, onClose }: AddProductModalProps) => {
             <button
               type="button"
               onClick={onClose}
-              className="w-full py-3 bg-gray-400 text-white rounded-lg transition-colors hover:bg-gray-500 dark:bg-gray-600 dark:hover:bg-gray-500"
+              className="w-full py-3 bg-gray-400 text-white rounded-lg hover:bg-gray-500 dark:bg-gray-600"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="w-full py-3 bg-green-500 text-white rounded-lg transition-colors hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-500"
+              className="w-full py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 dark:bg-green-600"
             >
               Add Product
             </button>

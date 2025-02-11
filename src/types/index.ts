@@ -24,7 +24,7 @@ export interface IOrder {
 }
 
 export interface Product {
-  _id: string;
+  _id?: string;
   name: string;
   brand: string;
   price: number;
@@ -33,9 +33,20 @@ export interface Product {
   quantity: number;
   inStock: boolean;
   image: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
+  createdAt?: string;
+  updatedAt?: string;
+  __v?: number;
+}
+
+export interface ProductCreate {
+  name: string;
+  brand: string;
+  price: number;
+  category: string;
+  description: string;
+  quantity: number;
+  inStock: boolean;
+  image?: string;
 }
 
 export interface CartItem {

@@ -22,7 +22,12 @@ const ManageProducts = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: string | undefined) => {
+    if (!id) {
+      toast.error("Product ID is missing. Cannot delete product.");
+      return;
+    }
+
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this product?"
     );
