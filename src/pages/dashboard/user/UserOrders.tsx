@@ -13,34 +13,70 @@ const UserOrders = () => {
     dispatch(fetchOrders());
   }, [dispatch]);
 
-  if (status === "loading") return <p>Loading your orders...</p>;
-  if (status === "failed") return <p>Error: {error}</p>;
+  if (status === "loading")
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-lg text-gray-600 dark:text-gray-300">
+          Loading your orders...
+        </p>
+      </div>
+    );
+
+  if (status === "failed")
+    return (
+      <p className="text-center mt-10 text-red-500">
+        {error || "Failed to load orders."}
+      </p>
+    );
 
   return (
-    <div className="max-w-5xl mx-auto">
-      <h2 className="text-2xl font-bold mb-4">My Orders</h2>
-      <table className="w-full border-collapse border border-gray-300 text-center">
-        <thead>
-          <tr className="bg-gray-200">
-            <th className="border p-2">Order ID</th>
-            <th className="border p-2">Total Price</th>
-            <th className="border p-2">Status</th>
-            <th className="border p-2">Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {orders.map((order) => (
-            <tr key={order._id} className="border">
-              <td className="border p-2">{order._id}</td>
-              <td className="border p-2">${order.totalPrice}</td>
-              <td className="border p-2">{order.status}</td>
-              <td className="border p-2">
-                {new Date(order.createdAt).toLocaleDateString()}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="min-h-screen py-12 px-4 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
+      <div className="max-w-5xl mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
+        <h2 className="text-3xl font-bold text-center text-green-600 dark:text-green-400 mb-6">
+          📦 My Orders
+        </h2>
+
+        {orders.length === 0 ? (
+          <p className="text-center text-lg">No orders found.</p>
+        ) : (
+          <>
+            {/* Scrollable Orders Table */}
+            <div className="overflow-x-auto">
+              <div className="max-h-96 overflow-y-auto border rounded-lg shadow-md">
+                <table className="w-full border-collapse text-center">
+                  <thead className="sticky top-0 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white">
+                    <tr>
+                      <th className="p-3 border">Order ID</th>
+                      <th className="p-3 border">Total Price</th>
+                      <th className="p-3 border">Status</th>
+                      <th className="p-3 border">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {orders.map((order) => (
+                      <tr
+                        key={order._id}
+                        className="border-b hover:bg-gray-100 dark:hover:bg-gray-700"
+                      >
+                        <td className="p-3 border">{order._id}</td>
+                        <td className="p-3 border text-green-600 dark:text-green-400 font-bold">
+                          ${order.totalPrice.toFixed(2)}
+                        </td>
+                        <td className="p-3 border text-orange-600 dark:text-orange-400 font-semibold">
+                          {order.status}
+                        </td>
+                        <td className="p-3 border">
+                          {new Date(order.createdAt).toLocaleDateString()}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };
