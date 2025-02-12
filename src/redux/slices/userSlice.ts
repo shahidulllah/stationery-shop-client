@@ -8,7 +8,7 @@ type User = {
   name: string;
   role: "user" | "admin";
   email: string;
-  image?: string; 
+  image?: string;
   shippingAddress?: string;
 };
 
@@ -49,15 +49,18 @@ export const updateUserRole = createAsyncThunk<
 //Update user
 export const updateUserProfile = createAsyncThunk<
   User,
-  { userId: string; name: string; shippingAddress: string, image: string }
->("users/updateUserProfile", async ({ userId, name, shippingAddress, image }) => {
-  const response = await axios.put(`${BASE_URL}/users/${userId}/profile`, {
-    name,
-    shippingAddress,
-    image
-  });
-  return response.data;
-});
+  { userId: string; name: string; shippingAddress: string; image: string }
+>(
+  "users/updateUserProfile",
+  async ({ userId, name, shippingAddress, image }) => {
+    const response = await axios.put(`${BASE_URL}/users/${userId}/profile`, {
+      name,
+      shippingAddress,
+      image,
+    });
+    return response.data;
+  }
+);
 
 // Delete user
 export const deleteUser = createAsyncThunk<string, string>(

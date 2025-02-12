@@ -23,7 +23,7 @@ const Navbar = () => {
     dispatch(logout());
     closeMenu();
   };
-  
+
   const menuItems = [
     { label: "Home", href: "/" },
     { label: "All Products", href: "/products" },

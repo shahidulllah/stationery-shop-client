@@ -1,27 +1,25 @@
-
 import {
- Facebook,
+  Facebook,
   Instagram,
   TextIcon as Telegram,
   TwitterIcon,
-} from 'lucide-react'
-import { Link } from 'react-router'
-
+} from "lucide-react";
+import { Link } from "react-router";
 
 const navigationLinks = [
   [
-    { label: 'Home', href: '/' },
-    { label: 'The Project', href: '/project' },
-    { label: 'Why Us', href: '/why-us' },
-    { label: 'FAQ', href: '/faq' },
+    { label: "Home", href: "/" },
+    { label: "The Project", href: "/project" },
+    { label: "Why Us", href: "/why-us" },
+    { label: "FAQ", href: "/faq" },
   ],
   [
-    { label: 'Website Policy', href: '/website-policy' },
-    { label: 'Accessibility Policy', href: '/accessibility' },
-    { label: 'Privacy Policy', href: '/privacy-policy' },
-    { label: 'Terms and Conditions', href: '/terms' },
+    { label: "Website Policy", href: "/website-policy" },
+    { label: "Accessibility Policy", href: "/accessibility" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms and Conditions", href: "/terms" },
   ],
-]
+];
 
 export default function Footer() {
   return (
@@ -30,12 +28,12 @@ export default function Footer() {
         <div className="flex flex-col items-center text-center space-y-8">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-          <Link to="/" className="flex items-center space-x-3">
-                {/* <img src="/src/assets/logo.svg" alt="" /> */}
-                <h1 className="font-bold text-3xl text-white dark:text-white">
+            <Link to="/" className="flex items-center space-x-3">
+              {/* <img src="/src/assets/logo.svg" alt="" /> */}
+              <h1 className="font-bold text-3xl text-white dark:text-white">
                 STN shop
-                </h1>
-              </Link>
+              </h1>
+            </Link>
           </div>
 
           {/* Tagline */}
@@ -60,8 +58,11 @@ export default function Footer() {
           {/* Navigation Links */}
           <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mt-12">
             {navigationLinks.map((column, columnIndex) => (
-              <div key={columnIndex} className="space-y-4 grid grid-cols-1 text-start md:grid-cols-2 items-center">
-                {column.map(link => (
+              <div
+                key={columnIndex}
+                className="space-y-4 grid grid-cols-1 text-start md:grid-cols-2 items-center"
+              >
+                {column.map((link) => (
                   <Link
                     key={link.label}
                     to={link.href}
@@ -79,35 +80,26 @@ export default function Footer() {
 
           {/* Copyright and Social Links */}
           <div className="w-full flex flex-col md:flex-row justify-between space-y-4 md:space-y-0 text-start">
-         <div>
-          <p className="text-xl text-[#ffffff] dark:text-gray-400 font-bold font-oswald"> STN shop</p>
-            <p className="text-sm text-[#ffffff] dark:text-gray-400">
-              Copyright © 2024  STN shop All Rights Reserved
-            </p>
-         </div>
+            <div>
+              <p className="text-xl text-[#ffffff] dark:text-gray-400 font-bold font-oswald">
+                {" "}
+                STN shop
+              </p>
+              <p className="text-sm text-[#ffffff] dark:text-gray-400">
+                Copyright © 2024 STN shop All Rights Reserved
+              </p>
+            </div>
             <div className="flex justify-end space-x-4 text-[#ffffff]">
-              <Link
-                to="#"
-                className=" dark:text-gray-400 hover:text-[#0AE08F]"
-              >
+              <Link to="#" className=" dark:text-gray-400 hover:text-[#0AE08F]">
                 <Instagram className="w-5 h-5" />
               </Link>
-              <Link
-                to="#"
-                className=" dark:text-gray-400 hover:text-[#0AE08F]"
-              >
+              <Link to="#" className=" dark:text-gray-400 hover:text-[#0AE08F]">
                 <Telegram className="w-5 h-5" />
               </Link>
-              <Link
-                to="#"
-                className=" dark:text-gray-400 hover:text-[#0AE08F]"
-              >
+              <Link to="#" className=" dark:text-gray-400 hover:text-[#0AE08F]">
                 <Facebook className="w-5 h-5" />
               </Link>
-              <Link
-                to="#"
-                className=" dark:text-gray-400 hover:text-[#0AE08F]"
-              >
+              <Link to="#" className=" dark:text-gray-400 hover:text-[#0AE08F]">
                 <TwitterIcon className="w-5 h-5" />
               </Link>
             </div>
@@ -115,5 +107,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

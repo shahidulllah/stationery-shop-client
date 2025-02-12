@@ -23,20 +23,13 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await loginUser(formData); 
+      const response = await loginUser(formData);
       const { user, token } = response.data;
-      console.log("user:", user, "token:", token); 
-      dispatch(setUser({ user, token })); 
-  
+      console.log("user:", user, "token:", token);
+      dispatch(setUser({ user, token }));
+
       toast.success("Login successful!");
       navigate("/");
-  
-      // // Redirect based on role
-      // if (user.role === "admin") {
-      //   navigate("/dashboard/admin");
-      // } else {
-      //   navigate("/dashboard/user");
-      // }
     } catch (error) {
       console.log(error);
       toast.error("Login failed! Check your credentials.");
