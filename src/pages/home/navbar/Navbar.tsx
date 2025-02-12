@@ -12,7 +12,7 @@ const Navbar = () => {
   const { theme, setTheme } = useTheme();
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth.user);
-  const cartItems = useSelector((state: RootState) => state.cart.items); 
+  const cartItems = useSelector((state: RootState) => state.cart.items);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
@@ -101,7 +101,7 @@ const Navbar = () => {
                     }
                     className="block px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                   >
-                   Dashboard
+                    Dashboard
                   </NavLink>
                   <button
                     onClick={handleLogout}

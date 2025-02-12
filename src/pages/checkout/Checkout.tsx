@@ -62,14 +62,19 @@ const CheckoutForm = () => {
         // Dispatch order placement
         dispatch(
           placeOrder({
-            email: user?.email, 
-            products: cartItems.map((item) => ({
-              product: item.product._id,
-              name: item.product.name,
-              price: item.product.price,
-              quantity: item.quantity,
-            })),
-            totalPrice: totalAmount, 
+            email: user?.email,
+            products: cartItems.map((item) => {
+              if (!item.product._id) {
+                throw new Error("Product ID is missing");
+              }
+              return {
+                product: item.product._id,
+                name: item.product.name,
+                price: item.product.price,
+                quantity: item.quantity,
+              };
+            }),
+            totalPrice: totalAmount,
             paymentIntentId: result.paymentIntent.id,
           })
         ).then((orderAction) => {

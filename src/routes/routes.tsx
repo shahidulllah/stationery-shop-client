@@ -18,6 +18,7 @@ import UserDashboardLayout from "@/pages/dashboard/layout/UserDashboardLayout";
 import ManageUsers from "@/pages/dashboard/admin/ManageUsers";
 import Checkout from "@/pages/checkout/Checkout";
 import OrderConfirmation from "@/pages/orderPage/OrderConfirmation";
+import PrivateRoute from "./privateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -27,7 +28,11 @@ export const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "products", element: <AllProducts /> },
       { path: "products/:id", element: <ProductDetails /> },
-      { path: "cart", element: <Cart /> },
+      {
+        path: "cart",
+        element: <PrivateRoute />,
+        children: [{ index: true, element: <Cart /> }],
+      },
       { path: "checkout", element: <Checkout /> },
       { path: "order-confirmation/:id", element: <OrderConfirmation /> },
       { path: "about", element: <About /> },
@@ -44,7 +49,14 @@ export const router = createBrowserRouter([
       {
         element: <UserDashboardLayout />,
         children: [
-          { index: true, element: <><UserOrders/></> },
+          {
+            index: true,
+            element: (
+              <>
+                <UserOrders />
+              </>
+            ),
+          },
           { path: "orders", element: <UserOrders /> },
           { path: "profile", element: <Profile /> },
         ],
@@ -60,7 +72,14 @@ export const router = createBrowserRouter([
       {
         element: <AdminDashboardLayout />,
         children: [
-          { index: true, element: <><ManageProducts/></> },
+          {
+            index: true,
+            element: (
+              <>
+                <ManageProducts />
+              </>
+            ),
+          },
           { path: "manage-products", element: <ManageProducts /> },
           { path: "manage-orders", element: <ManageOrders /> },
           { path: "manage-users", element: <ManageUsers /> },
