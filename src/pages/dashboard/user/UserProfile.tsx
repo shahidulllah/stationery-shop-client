@@ -10,7 +10,6 @@ const UserProfile = () => {
   const user = useSelector((state: RootState) => state.auth.user);
 
   const [name, setName] = useState(user?.name || "");
-  const [email, setEmail] = useState(user?.email || "");
   const [image, setImage] = useState(user?.image || "");
   const [shippingAddress, setShippingAddress] = useState(
     user?.shippingAddress || ""
@@ -18,7 +17,6 @@ const UserProfile = () => {
 
   const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Dispatching updateUserProfile with:", { userId: user.id, name, shippingAddress, image, email });
 
     if (!user || !user.id) {
       toast.error("User not found. Please log in again.");
@@ -28,11 +26,15 @@ const UserProfile = () => {
     try {
       const updatedUser = await dispatch(
         updateUserProfile({ userId: user.id, name, shippingAddress, image })
-      ).unwrap(); 
-     
+      ).unwrap();
+
       dispatch(updateProfile(updatedUser));
-  
+
       toast.success("Profile updated successfully!");
+
+      setName("");
+      setImage("");
+      setShippingAddress("");
     } catch (error) {
       console.log(error);
       toast.error("Failed to update profile");
@@ -63,9 +65,9 @@ const UserProfile = () => {
           </label>
           <input
             type="email"
-            className="w-full p-3 border rounded"
+            className="w-full p-3 border rounded cursor-not-allowed bg-gray-100"
             value={user?.email || ""}
-            onChange={(e) => setEmail(e.target.value)}
+            disabled
           />
         </div>
 
