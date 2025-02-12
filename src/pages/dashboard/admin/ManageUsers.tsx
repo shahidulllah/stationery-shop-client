@@ -75,7 +75,7 @@ const ManageUsers = () => {
               </tr>
             </thead>
             <tbody className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white">
-              {users.map((user: User) => (
+              {users?.map((user: User) => (
                 <tr
                   key={user._id}
                   className="border-b dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all"

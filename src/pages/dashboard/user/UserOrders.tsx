@@ -52,7 +52,7 @@ const UserOrders = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {orders.map((order) => (
+                    {orders?.map((order) => (
                       <tr
                         key={order._id}
                         className="border-b hover:bg-gray-100 dark:hover:bg-gray-700"

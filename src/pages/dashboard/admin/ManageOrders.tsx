@@ -48,7 +48,7 @@ const ManageOrders = () => {
             </tr>
           </thead>
           <tbody className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white">
-            {orders.map((order) => (
+            {orders?.map((order) => (
               <tr
                 key={order._id}
                 className="border dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all"

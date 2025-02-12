@@ -88,7 +88,7 @@ const AllProducts = () => {
       {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-12">
         {filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
+          filteredProducts?.map((product) => (
             <div
               key={product._id}
               className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg overflow-hidden transition-transform transform hover:scale-105"

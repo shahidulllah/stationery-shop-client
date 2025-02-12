@@ -16,7 +16,7 @@ const Hero = () => {
         {/* Slide 1 */}
         <div className="relative h-[400px] md:h-[600px]">
           <img
-            src="/src/assets/banner.jpg"
+            src="https://i.ibb.co.com/yF02Dz8x/banner.jpg"
             alt="Special Offer 1"
             className="w-full h-full object-cover"
           />
@@ -38,7 +38,7 @@ const Hero = () => {
         {/* Slide 2 */}
         <div className="relative h-[400px] md:h-[600px]">
           <img
-            src="/src/assets/banner-2.jpg"
+            src="https://i.ibb.co.com/0RgyFs7W/banner-2.jpg"
             alt="Special Offer 2"
             className="w-full h-full object-cover"
           />
@@ -60,7 +60,7 @@ const Hero = () => {
         {/* Slide 3 */}
         <div className="relative h-[400px] md:h-[600px]">
           <img
-            src="/src/assets/banner-3.jpg"
+            src="https://i.ibb.co.com/G3sScpsw/banner-3.jpg"
             alt="New Arrivals"
             className="w-full h-full object-cover"
           />

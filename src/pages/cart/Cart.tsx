@@ -35,7 +35,7 @@ const Cart = () => {
     if (outOfStockItems.length > 0) {
       toast.error(
         `Some items exceed available stock: ${outOfStockItems
-          .map((item) => item.product.name)
+          .map((item) => item?.product?.name)
           .join(", ")}`
       );
       return;

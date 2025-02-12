@@ -81,7 +81,7 @@ const ManageProducts = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
+            {products?.map((product) => (
               <tr key={product._id} className="border hover:bg-gray-100">
                 <td className="border p-3">{product.name}</td>
                 <td className="border p-3 text-center">${product.price}</td>

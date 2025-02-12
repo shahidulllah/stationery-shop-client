@@ -70,7 +70,7 @@ const CheckoutForm = () => {
         dispatch(
           placeOrder({
             email: user?.email,
-            products: cartItems.map((item) => {
+            products: cartItems?.map((item) => {
               if (!item.product._id) {
                 throw new Error("Product ID is missing");
               }
@@ -114,7 +114,7 @@ const CheckoutForm = () => {
         <div className="space-y-6">
           <div>
             <h3 className="text-xl font-bold mb-4">Order Summary</h3>
-            {cartItems.map((item) => (
+            {cartItems?.map((item) => (
               <div
                 key={item.product._id}
                 className="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 py-4"

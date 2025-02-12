@@ -57,12 +57,12 @@ export default function Footer() {
 
           {/* Navigation Links */}
           <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mt-12">
-            {navigationLinks.map((column, columnIndex) => (
+            {navigationLinks?.map((column, columnIndex) => (
               <div
                 key={columnIndex}
                 className="space-y-4 grid grid-cols-1 text-start md:grid-cols-2 items-center"
               >
-                {column.map((link) => (
+                {column?.map((link) => (
                   <Link
                     key={link.label}
                     to={link.href}

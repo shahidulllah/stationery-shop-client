@@ -155,7 +155,7 @@ const productSlice = createSlice({
       })
       .addCase(updateProduct.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.products = state.products.map((product) =>
+        state.products = state.products?.map((product) =>
           product._id === action.payload._id ? action.payload : product
         );
       })

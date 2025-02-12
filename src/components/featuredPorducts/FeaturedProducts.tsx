@@ -15,7 +15,7 @@ const FeaturedProducts = () => {
   }, [dispatch]);
 
   // Get up to 6 featured products
-  const featuredProducts = products.slice(0, 6);
+  const featuredProducts = products?.slice(0, 6);
 
   return (
     <>
@@ -39,7 +39,7 @@ const FeaturedProducts = () => {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
             {
-              featuredProducts.map((product) => (
+              featuredProducts?.map((product) => (
                 <div
                   key={product._id}
                   className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg overflow-hidden transition-transform transform hover:scale-105"
