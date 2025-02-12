@@ -92,20 +92,52 @@ const Navbar = () => {
                 />
               </button>
               {dropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 shadow-lg rounded-md py-2 z-50">
+                <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 shadow-lg rounded-lg py-3 px-4 z-50 transition-all duration-300">
+                  {/* Profile Header */}
+                  <div className="flex flex-col justify-center items-center space-x-3 border-b pb-3 mb-3">
+                    <div className="relative w-12 h-12">
+                      {/* Profile Image */}
+                      <img
+                        src={user?.profileImage || "/default-avatar.png"}
+                        alt="User Avatar"
+                        className="w-full h-full rounded-full border border-gray-300 dark:border-gray-600"
+                      />
+
+                      {/* Role Indicator Badge */}
+                      <span
+                        className={`absolute top-0 -right-5 text-xs font-medium text-white px-1 rounded-full shadow-md ${
+                          user?.role === "admin" ? "bg-red-500" : "bg-blue-500"
+                        }`}
+                      >
+                        {user?.role || "User"}
+                      </span>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-center text-gray-900 dark:text-white">
+                        {user?.name || "User Name"}
+                      </h4>
+                      <p className="text-sm text-gray-500 text-center dark:text-gray-300">
+                        {user?.email || "user@example.com"}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Dashboard Link */}
                   <NavLink
                     to={
                       user.role === "admin"
                         ? "/dashboard/admin"
                         : "/dashboard/user"
                     }
-                    className="block px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    className="flex items-center space-x-2 text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors px-3 py-2 rounded-md"
                   >
-                    Dashboard
+                    <span className="font-medium">Dashboard</span>
                   </NavLink>
+
+                  {/* Logout Button */}
                   <button
                     onClick={handleLogout}
-                    className="block w-full text-left px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    className="w-full text-left text-red-600 hover:bg-red-100 dark:hover:bg-red-900 px-3 py-2 rounded-md transition-colors mt-2 font-medium"
                   >
                     Logout
                   </button>
