@@ -3,21 +3,40 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/redux/store";
 import { updateUserProfile } from "@/redux/slices/userSlice";
 import { toast } from "sonner";
+import { updateProfile } from "@/redux/slices/authSlice";
 
 const UserProfile = () => {
   const dispatch = useDispatch<AppDispatch>();
   const user = useSelector((state: RootState) => state.auth.user);
 
   const [name, setName] = useState(user?.name || "");
+  const [email, setEmail] = useState(user?.email || "");
+  const [image, setImage] = useState(user?.image || "");
   const [shippingAddress, setShippingAddress] = useState(
     user?.shippingAddress || ""
   );
 
-  const handleUpdateProfile = (e: React.FormEvent) => {
+  const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(updateUserProfile({ userId: user._id, name, shippingAddress }))
-      .then(() => toast.success("Profile updated successfully!"))
-      .catch(() => toast.error("Failed to update profile"));
+    console.log("Dispatching updateUserProfile with:", { userId: user.id, name, shippingAddress, image, email });
+
+    if (!user || !user.id) {
+      toast.error("User not found. Please log in again.");
+      return;
+    }
+
+    try {
+      const updatedUser = await dispatch(
+        updateUserProfile({ userId: user.id, name, shippingAddress, image })
+      ).unwrap(); 
+     
+      dispatch(updateProfile(updatedUser));
+  
+      toast.success("Profile updated successfully!");
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to update profile");
+    }
   };
 
   return (
@@ -44,9 +63,22 @@ const UserProfile = () => {
           </label>
           <input
             type="email"
-            className="w-full p-3 border rounded bg-gray-200 cursor-not-allowed"
+            className="w-full p-3 border rounded"
             value={user?.email || ""}
-            disabled
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+
+        <div>
+          <label className="block text-gray-700 dark:text-gray-300 font-medium">
+            Image
+          </label>
+          <input
+            type="text"
+            placeholder="Image URL"
+            className="w-full p-3 border rounded"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
           />
         </div>
 
@@ -57,6 +89,7 @@ const UserProfile = () => {
           <input
             type="text"
             className="w-full p-3 border rounded"
+            placeholder="Add your shipping address"
             value={shippingAddress}
             onChange={(e) => setShippingAddress(e.target.value)}
           />

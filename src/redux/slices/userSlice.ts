@@ -8,6 +8,8 @@ type User = {
   name: string;
   role: "user" | "admin";
   email: string;
+  image?: string; 
+  shippingAddress?: string;
 };
 
 interface UserState {
@@ -27,6 +29,7 @@ export const fetchUsers = createAsyncThunk<User[]>(
   "users/fetchUsers",
   async () => {
     const response = await axios.get(`${BASE_URL}/users`);
+    console.log("Fetched users:", response.data);
     return response.data;
   }
 );
@@ -39,17 +42,19 @@ export const updateUserRole = createAsyncThunk<
   const response = await axios.put(`${BASE_URL}/users/${userId}/role`, {
     role,
   });
+  console.log("Updated user:", response.data);
   return response.data;
 });
 
 //Update user
 export const updateUserProfile = createAsyncThunk<
   User,
-  { userId: string; name: string; shippingAddress: string }
->("users/updateUserProfile", async ({ userId, name, shippingAddress }) => {
+  { userId: string; name: string; shippingAddress: string, image: string }
+>("users/updateUserProfile", async ({ userId, name, shippingAddress, image }) => {
   const response = await axios.put(`${BASE_URL}/users/${userId}/profile`, {
     name,
     shippingAddress,
+    image
   });
   return response.data;
 });
@@ -101,7 +106,7 @@ const userSlice = createSlice({
           (user) => user._id === updatedUser._id
         );
         if (index !== -1) {
-          state.users[index] = updatedUser;
+          state.users[index] = { ...state.users[index], ...updatedUser };
         }
       })
       // Delete user

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Menu, Sun, Moon, X, ShoppingCart } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { Menu, Sun, Moon, X, ShoppingCart, Edit } from "lucide-react";
+import { Link, NavLink } from "react-router-dom";
 import { useTheme } from "@/components/theme-provider";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/redux/slices/authSlice";
@@ -23,7 +23,7 @@ const Navbar = () => {
     dispatch(logout());
     closeMenu();
   };
-
+  console.log(user);
   const menuItems = [
     { label: "Home", href: "/" },
     { label: "All Products", href: "/products" },
@@ -86,7 +86,10 @@ const Navbar = () => {
                 className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-300 dark:border-gray-600 hover:border-primary transition-colors"
               >
                 <img
-                  src={user?.profileImage || "/default-avatar.png"}
+                  src={
+                    user?.image ||
+                    "https://i.ibb.co.com/VTxD6sh/service-ico4.webp"
+                  }
                   alt="User"
                   className="w-full h-full object-cover"
                 />
@@ -95,10 +98,20 @@ const Navbar = () => {
                 <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 shadow-lg rounded-lg py-3 px-4 z-50 transition-all duration-300">
                   {/* Profile Header */}
                   <div className="flex flex-col justify-center items-center space-x-3 border-b pb-3 mb-3">
+                    {user?.role === "user" && (
+                      <div className="w-full flex justify-end ">
+                        <Link to="dashboard/user/profile" className="mr-3">
+                          <Edit size={20} />
+                        </Link>
+                      </div>
+                    )}
                     <div className="relative w-12 h-12">
                       {/* Profile Image */}
                       <img
-                        src={user?.profileImage || "/default-avatar.png"}
+                        src={
+                          user?.image ||
+                          "https://i.ibb.co.com/VTxD6sh/service-ico4.webp"
+                        }
                         alt="User Avatar"
                         className="w-full h-full rounded-full border border-gray-300 dark:border-gray-600"
                       />
