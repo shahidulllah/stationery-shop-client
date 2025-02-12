@@ -75,7 +75,7 @@ const Cart = () => {
               </div>
             </div>
             <button
-              onClick={() => dispatch(removeFromCart(item?.product?._id))}
+              onClick={() => dispatch(removeFromCart(item?.product?._id ?? ""))}
               className="text-red-500 px-4 py-2 rounded border border-red-500 hover:bg-red-500 hover:text-white transition-colors mt-4 sm:mt-0"
             >
               Remove
