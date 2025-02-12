@@ -18,7 +18,7 @@ import UserDashboardLayout from "@/pages/dashboard/layout/UserDashboardLayout";
 import ManageUsers from "@/pages/dashboard/admin/ManageUsers";
 import Checkout from "@/pages/checkout/Checkout";
 import OrderConfirmation from "@/pages/orderPage/OrderConfirmation";
-import PrivateRoute from "./privateRoute";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
