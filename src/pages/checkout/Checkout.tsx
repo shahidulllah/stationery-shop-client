@@ -11,6 +11,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { clearCart } from "@/redux/slices/cartSlice";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const stripePromise = loadStripe(
@@ -35,6 +36,12 @@ const CheckoutForm = () => {
   const handlePayment = async () => {
     if (!stripe || !elements) return;
     setLoading(true);
+
+    //Check admin cannot place the order
+    if (user?.role === "admin") {
+      toast.error("Admins cannot place orders.");
+      return;
+    }
 
     try {
       const res = await fetch(`${BASE_URL}/payments/create-payment-intent`, {
@@ -80,6 +87,9 @@ const CheckoutForm = () => {
         ).then((orderAction) => {
           if (placeOrder.fulfilled.match(orderAction)) {
             toast.success("Order placed successfully!");
+
+            dispatch(clearCart());
+
             const orderId = orderAction.payload?._id;
             console.log(orderId);
             if (orderId) {
@@ -138,7 +148,7 @@ const CheckoutForm = () => {
           <button
             onClick={handlePayment}
             className="bg-green-600 text-white px-6 py-3 rounded-lg w-full hover:bg-green-700 transition-colors"
-            disabled={loading}
+            disabled={loading || user?.role === "admin"} 
           >
             {loading ? "Processing..." : "Pay Now"}
           </button>

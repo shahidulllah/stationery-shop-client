@@ -7,7 +7,7 @@ type User = {
   _id: string;
   name: string;
   role: "user" | "admin";
-  email: string; 
+  email: string;
 };
 
 interface UserState {
@@ -42,12 +42,24 @@ export const updateUserRole = createAsyncThunk<
   return response.data;
 });
 
+//Update user
+export const updateUserProfile = createAsyncThunk<
+  User,
+  { userId: string; name: string; shippingAddress: string }
+>("users/updateUserProfile", async ({ userId, name, shippingAddress }) => {
+  const response = await axios.put(`${BASE_URL}/users/${userId}/profile`, {
+    name,
+    shippingAddress,
+  });
+  return response.data;
+});
+
 // Delete user
 export const deleteUser = createAsyncThunk<string, string>(
   "users/deleteUser",
   async (userId) => {
     await axios.delete(`${BASE_URL}/users/${userId}`);
-    return userId; 
+    return userId;
   }
 );
 
@@ -82,6 +94,16 @@ const userSlice = createSlice({
           }
         }
       )
+      //Update user
+      .addCase(updateUserProfile.fulfilled, (state, action) => {
+        const updatedUser = action.payload;
+        const index = state.users.findIndex(
+          (user) => user._id === updatedUser._id
+        );
+        if (index !== -1) {
+          state.users[index] = updatedUser;
+        }
+      })
       // Delete user
       .addCase(deleteUser.fulfilled, (state, action: PayloadAction<string>) => {
         state.users = state.users.filter((user) => user._id !== action.payload);

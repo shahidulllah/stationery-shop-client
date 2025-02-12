@@ -1,16 +1,23 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "@/redux/store";
+import { updateUserProfile } from "@/redux/slices/userSlice";
 import { toast } from "sonner";
 
 const UserProfile = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const user = useSelector((state: RootState) => state.auth.user);
+
   const [name, setName] = useState(user?.name || "");
+  const [shippingAddress, setShippingAddress] = useState(
+    user?.shippingAddress || ""
+  );
 
   const handleUpdateProfile = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement API call to update user profile
-    toast.success("Profile updated successfully!");
+    dispatch(updateUserProfile({ userId: user._id, name, shippingAddress }))
+      .then(() => toast.success("Profile updated successfully!"))
+      .catch(() => toast.error("Failed to update profile"));
   };
 
   return (
@@ -25,7 +32,7 @@ const UserProfile = () => {
           </label>
           <input
             type="text"
-            className="w-full p-3 border rounded focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+            className="w-full p-3 border rounded"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -37,13 +44,24 @@ const UserProfile = () => {
           </label>
           <input
             type="email"
-            className="w-full p-3 border rounded bg-gray-200 dark:bg-gray-600 dark:text-gray-400 cursor-not-allowed"
+            className="w-full p-3 border rounded bg-gray-200 cursor-not-allowed"
             value={user?.email || ""}
             disabled
           />
         </div>
 
-        {/* Update Button */}
+        <div>
+          <label className="block text-gray-700 dark:text-gray-300 font-medium">
+            Shipping Address
+          </label>
+          <input
+            type="text"
+            className="w-full p-3 border rounded"
+            value={shippingAddress}
+            onChange={(e) => setShippingAddress(e.target.value)}
+          />
+        </div>
+
         <button
           type="submit"
           className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-full transition"
