@@ -5,13 +5,16 @@ import { fetchOrders } from "@/redux/slices/orderSlice";
 
 const UserOrders = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const user = useSelector((state: RootState) => state.auth.user);
   const { orders, status, error } = useSelector(
     (state: RootState) => state.orders
   );
 
   useEffect(() => {
-    dispatch(fetchOrders());
-  }, [dispatch]);
+    if (user?.email) {
+      dispatch(fetchOrders());
+    }
+  }, [dispatch, user?.email]);
 
   if (status === "loading")
     return (
@@ -29,6 +32,8 @@ const UserOrders = () => {
       </p>
     );
 
+  const userOrders = orders?.filter((order) => order.email === user?.email);
+
   return (
     <div className="min-h-screen py-12 px-4 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
       <div className="max-w-5xl mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
@@ -36,7 +41,7 @@ const UserOrders = () => {
           My Orders
         </h2>
 
-        {orders.length === 0 ? (
+        {userOrders?.length === 0 ? (
           <p className="text-center text-lg">No orders found.</p>
         ) : (
           <>
@@ -52,7 +57,7 @@ const UserOrders = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {orders?.map((order) => (
+                    {userOrders?.map((order) => (
                       <tr
                         key={order._id}
                         className="border-b hover:bg-gray-100 dark:hover:bg-gray-700"

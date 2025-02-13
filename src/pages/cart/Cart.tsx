@@ -14,7 +14,7 @@ const Cart = () => {
     dispatch(fetchCart());
   }, [dispatch]);
 
-  if (cartItems.length === 0)
+  if (cartItems?.length === 0)
     return (
       <div className="h-64 flex items-center justify-center text-xl text-gray-700 dark:text-gray-300">
         Your cart is empty...
@@ -32,7 +32,7 @@ const Cart = () => {
       (item) => item?.quantity > item.product.quantity
     );
 
-    if (outOfStockItems.length > 0) {
+    if (outOfStockItems?.length > 0) {
       toast.error(
         `Some items exceed available stock: ${outOfStockItems
           .map((item) => item?.product?.name)

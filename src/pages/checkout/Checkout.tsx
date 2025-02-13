@@ -148,7 +148,7 @@ const CheckoutForm = () => {
           <button
             onClick={handlePayment}
             className="bg-green-600 text-white px-6 py-3 rounded-lg w-full hover:bg-green-700 transition-colors"
-            disabled={loading || user?.role === "admin"} 
+            disabled={loading || user?.role === "admin"}
           >
             {loading ? "Processing..." : "Pay Now"}
           </button>
