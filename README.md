@@ -64,29 +64,29 @@ cd stationery-shop-server
 npm install
 ```
 
-###🔑 Step 3: Create a .env File
-Create a .env file in the backend folder and add the following:
+### 🔑 Step 3: Create a .env File
+ Create a .env file in the backend folder and add the following:
 ```
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 ```
-###▶️ Step 4: Run the Backend
+### ▶️ Step 4: Run the Backend
 ```
 npm start
 ```
 
 ---
  ## 🎨 Frontend Setup
-  ###📂 Step 5:  Clone the Frontent Repository
+  ### 📂 Step 5:  Clone the Frontent Repository
 ```
 git [clone https://github.com/shahidulllah/stationery-shop-client]
 cd stationery-shop-server
 ```
- ###📂 Step 6: Install Dependencies
+ ### 📂 Step 6: Install Dependencies
 ```
 npm install
 ```
- ###Step 7: Run the Frontend
+ ### Step 7: Run the Frontend
 ```
 npm run dev
 ```
