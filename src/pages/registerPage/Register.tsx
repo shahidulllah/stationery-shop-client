@@ -53,7 +53,7 @@ export default function RegisterPage() {
               Welcome to Cryptop!
             </p>
             <p className="text-gray-600 dark:text-gray-300 text-sm">
-              Just a few steps and you going to join your first crypto card!
+              Just a few steps and you going to join your <strong>Stationary Shop</strong>!
             </p>
           </div>
 
