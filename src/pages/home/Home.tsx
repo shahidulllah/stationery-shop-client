@@ -1,15 +1,17 @@
-import FeaturedProducts from "@/components/featuredPorducts/FeaturedProducts";
+import FeaturedProducts from "@/components/home/FeaturedProducts";
 import Hero from "./hero/Hero";
-import Testimonials from "@/components/testimonials/Testimonials";
-import DealsAndOffers from "./dealesAndOffer/DealsAndOffers";
+import Testimonials from "@/components/home/Testimonials";
+import DealsAndOffers from "../../components/home/DealsAndOffers";
+import WhyChooseUs from "@/components/home/WhyChooseUs";
 
 const Home = () => {
   return (
     <div>
       <Hero />
       <FeaturedProducts />
-      <Testimonials />
       <DealsAndOffers/>
+      <WhyChooseUs/>
+      <Testimonials />
     </div>
   );
 };
