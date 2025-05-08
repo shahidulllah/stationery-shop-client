@@ -13,33 +13,33 @@ interface Deal {
 
 const deals: Deal[] = [
   {
-    title: "🔥 Hot Deal: 25% Off Writing Tools",
+    title: "Hot Deal: 25% Off Writing Tools",
     desc: "Get top-quality pens, pencils, and markers at 25% off. Limited time offer!",
-    image: "/images/deal-writing.jpg",
+    image: "/public/images/p-1.jpg",
     tag: "Limited Time",
     link: "/products?category=Writing",
     icon: <Flame className="text-red-500 w-6 h-6" />,
   },
   {
-    title: "🕒 Flash Sale: Office Supplies",
+    title: "Flash Sale: Office Supplies",
     desc: "Essential office items at discounted prices. Hurry, offer ends soon!",
-    image: "/images/deal-office.jpg",
+    image: "/public/images/p-2.jpg",
     tag: "Flash Sale",
     link: "/products?category=OfficeSupplies",
     icon: <Clock3 className="text-yellow-400 w-6 h-6" />,
   },
   {
-    title: "🎨 Art Supplies Special - 15% Off",
+    title: "Art Supplies Special - 15% Off",
     desc: "Bring creativity to life with discounted brushes, paints & more.",
-    image: "/images/deal-art.jpg",
+    image: "/public/images/p-3.jpg",
     tag: "Exclusive",
     link: "/products?category=ArtSupplies",
     icon: <Percent className="text-green-500 w-6 h-6" />,
   },
   {
-    title: "🕒 Flash Sale: Office Supplies",
+    title: "Flash Sale: Office Supplies",
     desc: "Essential office items at discounted prices. Hurry, offer ends soon!",
-    image: "/images/deal-office.jpg",
+    image: "/public/images/p-4.jpg",
     tag: "Flash Sale",
     link: "/products?category=OfficeSupplies",
     icon: <Clock3 className="text-yellow-400 w-6 h-6" />,
@@ -51,7 +51,7 @@ const DealsAndOffers: FC = () => {
     <section className="py-12 px-4 sm:px-6 lg:px-12 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center">
-          🎁 Exclusive Deals & Offers
+          Exclusive Deals & Offers
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {deals.map((deal, index) => (
