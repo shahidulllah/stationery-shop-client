@@ -40,8 +40,8 @@ const testimonials: Testimonial[] = [
 
 const Testimonials: FC = () => {
   return (
-    <section className="py-14 px-4 sm:px-6 lg:px-12 bg-gray-50 dark:bg-gray-950 text-gray-800 dark:text-white">
-      <div className="max-w-7xl mx-auto text-center">
+    <section className="py-14 bg-gray-50 dark:bg-gray-950 text-gray-800 dark:text-white">
+      <div className="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto text-center">
         <h2 className="text-3xl sm:text-4xl font-bold mb-4">
            What Our Customers Say?
         </h2>

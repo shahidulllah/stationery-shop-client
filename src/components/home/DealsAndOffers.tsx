@@ -48,8 +48,8 @@ const deals: Deal[] = [
 
 const DealsAndOffers: FC = () => {
   return (
-    <section className="py-12 px-4 sm:px-6 lg:px-12 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-12 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center">
           Exclusive Deals & Offers
         </h2>
@@ -73,7 +73,7 @@ const DealsAndOffers: FC = () => {
                     {deal.tag}
                   </span>
                 </div>
-                <h3 className="text-xl font-semibold mb-1">{deal.title}</h3>
+                <h3 className="text-xl font-semibold mb-1 line-clamp-1">{deal.title}</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
                   {deal.desc}
                 </p>

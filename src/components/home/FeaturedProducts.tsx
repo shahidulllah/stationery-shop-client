@@ -14,7 +14,7 @@ const FeaturedProducts = () => {
     dispatch(fetchProducts() as any);
   }, [dispatch]);
 
-  // Get up to 6 featured products
+  // Get up to 8 featured products
   const featuredProducts = products?.slice(0, 8);
 
   return (
