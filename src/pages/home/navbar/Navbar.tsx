@@ -44,7 +44,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 w-full bg-green-50 dark:bg-gray-900 shadow-md z-50 h-16">
+    <nav className="fixed top-0 w-full bg-green-100 dark:bg-gray-900 shadow-md z-50 h-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <NavLink to="/" className="flex items-center space-x-3">
           <h1 className="font-bold text-2xl sm:text-3xl dark:text-white">

@@ -50,17 +50,17 @@ const ProductDetails = () => {
     );
 
   return (
-    <div className="mt-16 min-h-screen py-12 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div className="mt-16 min-h-screen py-12 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white dark:bg-gray-800 shadow-2xl rounded-xl overflow-hidden transition-all">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 p-6 md:p-10">
             {/* Product Image */}
-            <div className="flex justify-center items-center p-6 bg-gray-200 dark:bg-gray-700">
+            <div className="flex justify-center items-center">
               {product?.image ? (
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full max-h-96 object-cover rounded-lg"
+                  className="w-full max-w-md object-cover rounded-lg shadow-md hover:scale-105 transition-transform"
                 />
               ) : (
                 <p className="text-gray-500 dark:text-gray-400">
@@ -69,36 +69,61 @@ const ProductDetails = () => {
               )}
             </div>
 
-            {/* Product Details */}
-            <div className="p-6">
-              <h1 className="text-4xl font-bold mb-4">{product?.name}</h1>
-              <p className="text-2xl font-semibold text-green-600 dark:text-green-400 mb-6">
-                ${product?.price}
-              </p>
-              <p className="text-lg text-gray-700 dark:text-gray-300 mb-8">
-                {product?.description}
-              </p>
+            {/* Product Info */}
+            <div className="flex flex-col justify-between space-y-6">
+              <div>
+                <h1 className="text-4xl font-bold mb-2">{product?.name}</h1>
+                <p className="text-2xl font-semibold text-green-600 dark:text-green-400 mb-4">
+                  ${product?.price}
+                </p>
+                <p className="text-gray-700 dark:text-gray-300 text-base mb-6">
+                  {product?.description}
+                </p>
 
-              {/* Additional Details */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-                <div>
-                  <h3 className="text-xl font-bold mb-2">Category</h3>
-                  <p className="text-gray-700 dark:text-gray-300">
-                    {product?.category}
-                  </p>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2">Stock</h3>
-                  <p className="text-gray-700 dark:text-gray-300">
-                    {product?.quantity} items available
-                  </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
+                  <div>
+                    <h4 className="font-semibold mb-1">Brand</h4>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      {product?.brand || "Unknown"}
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">Category</h4>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      {product?.category}
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">In Stock</h4>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      {product?.quantity} items
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">SKU</h4>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      STN-{product?._id?.slice(-6).toUpperCase()}
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">Delivery</h4>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      Within 3-5 business days
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">Return Policy</h4>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      7-day easy return
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              {/* Add to Cart Button */}
+              {/* Add to Cart */}
               <button
                 onClick={handleAddToCart}
-                className="w-full bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 shadow-md"
+                className="mt-4 w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 hover:scale-[1.02] transition-all duration-300 font-semibold shadow-md"
               >
                 Add to Cart
               </button>
