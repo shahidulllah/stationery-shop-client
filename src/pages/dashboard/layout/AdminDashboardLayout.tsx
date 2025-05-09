@@ -7,7 +7,7 @@ import {
   LogOut,
   ArrowLeft,
   Menu,
-  Box,
+  Shapes,
 } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { logout } from "@/redux/slices/authSlice";
@@ -65,7 +65,7 @@ const AdminDashboardLayout = () => {
               }`
             }
           >
-            <Box size={20} /> Overview
+            <Shapes size={20} /> Overview
           </NavLink>
           <NavLink
             to="manage-products"

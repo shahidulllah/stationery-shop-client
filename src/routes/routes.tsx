@@ -19,6 +19,7 @@ import ManageUsers from "@/pages/dashboard/admin/ManageUsers";
 import Checkout from "@/pages/checkout/Checkout";
 import OrderConfirmation from "@/pages/orderPage/OrderConfirmation";
 import PrivateRoute from "./PrivateRoute";
+import AdminOverview from "@/pages/dashboard/admin/AdminOverview";
 
 export const router = createBrowserRouter([
   {
@@ -80,6 +81,7 @@ export const router = createBrowserRouter([
               </>
             ),
           },
+          { path: "overview", element: <AdminOverview /> },
           { path: "manage-products", element: <ManageProducts /> },
           { path: "manage-orders", element: <ManageOrders /> },
           { path: "manage-users", element: <ManageUsers /> },
