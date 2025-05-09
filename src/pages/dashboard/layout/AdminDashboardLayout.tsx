@@ -22,92 +22,89 @@ const AdminDashboardLayout = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900">
-      {/* Sidebar */}
+    <div className="flex bg-gray-100 dark:bg-gray-900 min-h-screen">
+      {/* Fixed Sidebar */}
       <aside
-        className={`fixed lg:relative z-50 w-64 bg-gray-800 text-white p-5 transform ${
-          isSidebarOpen ? "translate-x-0 min-h-screen" : "-translate-x-full"
-        } lg:translate-x-0 transition-transform duration-300 ease-in-out`}
+        className={`fixed top-0 left-0 z-40 h-screen w-64 bg-gray-800 text-white shadow-lg transform transition-transform duration-300 ease-in-out ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } lg:translate-x-0`}
       >
-        {/* Header with Back Button */}
-        <div className="flex items-center justify-between mb-5">
-          <button
-            className="flex items-center gap-2 text-gray-300 hover:text-white"
-            onClick={() => navigate("/")}
-          >
-            <ArrowLeft className="hidden lg:flex" size={20} />{" "}
-            <span className="hidden lg:flex">Back to Home</span>
-          </button>
-          <button
-            className="lg:hidden text-gray-300 hover:text-white"
-            onClick={() => setIsSidebarOpen(false)}
-          >
-            ✖
-          </button>
-        </div>
+        <div className="h-full flex flex-col justify-between p-5">
+          <div>
+            {/* Header */}
+            <div className="flex items-center justify-between mb-5 lg:mb-8">
+              <button
+                className="flex items-center gap-2 text-gray-300 hover:text-white"
+                onClick={() => navigate("/")}
+              >
+                <ArrowLeft className="hidden lg:inline" size={20} />
+                <span className="hidden lg:inline">Back to Home</span>
+              </button>
+              <button
+                className="lg:hidden text-gray-300 hover:text-white"
+                onClick={() => setIsSidebarOpen(false)}
+              >
+                ✖
+              </button>
+            </div>
 
-        <button
-          className="flex lg:hidden mb-8 items-center gap-2 text-gray-300 hover:text-white"
-          onClick={() => navigate("/")}
-        >
-          <ArrowLeft size={20} /> <span>Back to Home</span>
-        </button>
+            {/* Title */}
+            <h2 className="text-xl font-bold mb-6">Admin Dashboard</h2>
 
-        <h2 className="text-xl font-bold mb-5">Admin Dashboard</h2>
+            {/* Navigation */}
+            <nav className="space-y-2">
+              <NavLink
+                to="overview"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-4 py-3 rounded-md transition text-sm ${
+                    isActive ? "bg-blue-600 text-white" : "hover:bg-gray-700"
+                  }`
+                }
+              >
+                <Shapes size={18} /> Overview
+              </NavLink>
+              <NavLink
+                to="manage-products"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-4 py-3 rounded-md transition text-sm ${
+                    isActive ? "bg-blue-600 text-white" : "hover:bg-gray-700"
+                  }`
+                }
+              >
+                <Package size={18} /> Manage Products
+              </NavLink>
+              <NavLink
+                to="manage-orders"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-4 py-3 rounded-md transition text-sm ${
+                    isActive ? "bg-blue-600 text-white" : "hover:bg-gray-700"
+                  }`
+                }
+              >
+                <ShoppingCart size={18} /> Manage Orders
+              </NavLink>
+              <NavLink
+                to="manage-users"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-4 py-3 rounded-md transition text-sm ${
+                    isActive ? "bg-blue-600 text-white" : "hover:bg-gray-700"
+                  }`
+                }
+              >
+                <Users size={18} /> Manage Users
+              </NavLink>
+            </nav>
+          </div>
 
-        {/* Navigation */}
-        <nav className="space-y-4">
-          <NavLink
-            to="overview"
-            className={({ isActive }) =>
-              `flex items-center gap-3 p-3 rounded transition ${
-                isActive ? "bg-blue-600 text-white" : "hover:bg-gray-700"
-              }`
-            }
-          >
-            <Shapes size={20} /> Overview
-          </NavLink>
-          <NavLink
-            to="manage-products"
-            className={({ isActive }) =>
-              `flex items-center gap-3 p-3 rounded transition ${
-                isActive ? "bg-blue-600 text-white" : "hover:bg-gray-700"
-              }`
-            }
-          >
-            <Package size={20} /> Manage Products
-          </NavLink>
-          <NavLink
-            to="manage-orders"
-            className={({ isActive }) =>
-              `flex items-center gap-3 p-3 rounded transition ${
-                isActive ? "bg-blue-600 text-white" : "hover:bg-gray-700"
-              }`
-            }
-          >
-            <ShoppingCart size={20} /> Manage Orders
-          </NavLink>
-
-          <NavLink
-            to="manage-users"
-            className={({ isActive }) =>
-              `flex items-center gap-3 p-3 rounded transition ${
-                isActive ? "bg-blue-600 text-white" : "hover:bg-gray-700"
-              }`
-            }
-          >
-            <Users size={20} /> Manage Users
-          </NavLink>
-        </nav>
-
-        {/* Logout Button */}
-        <div className="absolute bottom-5 left-5 right-5">
-          <button
-            onClick={handleLogout}
-            className="w-full flex items-center gap-3 p-3 bg-blue-900 hover:bg-blue-700 text-white rounded"
-          >
-            <LogOut size={20} /> Logout
-          </button>
+          {/* Logout */}
+          <div className="mt-6">
+            <button
+              onClick={handleLogout}
+              className="w-full flex items-center gap-3 px-4 py-3 bg-blue-900 hover:bg-blue-700 text-white rounded-md text-sm"
+            >
+              <LogOut size={18} /> Logout
+            </button>
+          </div>
         </div>
       </aside>
 
@@ -120,7 +117,7 @@ const AdminDashboardLayout = () => {
       </button>
 
       {/* Main Content */}
-      <main className="flex-1 p-6">
+      <main className="flex-1 lg:ml-64 p-6 min-h-screen">
         <Outlet />
       </main>
     </div>

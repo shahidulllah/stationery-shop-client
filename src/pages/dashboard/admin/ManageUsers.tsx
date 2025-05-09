@@ -64,7 +64,7 @@ const ManageUsers = () => {
           {error}
         </div>
       ) : (
-        <div className="overflow-x-auto border rounded-lg">
+        <div className="overflow-x-auto overflow-y-scroll max-h-[500px] border rounded-lg">
           <table className="min-w-full text-left border-collapse">
             <thead className="bg-gray-800 dark:bg-gray-700 text-white">
               <tr>
