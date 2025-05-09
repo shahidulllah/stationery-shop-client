@@ -5,6 +5,8 @@ import { AppDispatch, RootState } from "@/redux/store";
 import { fetchProductById } from "@/redux/slices/productSlice";
 import { addToCart } from "@/redux/slices/cartSlice";
 import { toast } from "sonner";
+import RelatedProducts from "./RelatedProducts";
+import ProductReviews from "./ProductReviews";
 
 const ProductDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -130,6 +132,8 @@ const ProductDetails = () => {
             </div>
           </div>
         </div>
+      <ProductReviews/>
+      <RelatedProducts/>
       </div>
     </div>
   );

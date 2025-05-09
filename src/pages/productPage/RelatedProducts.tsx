@@ -19,7 +19,7 @@ const RelatedProducts = () => {
   });
 
   return (
-    <section className="my-16 px-4 lg:px-8">
+    <section className="my-16">
       <h2 className="text-2xl font-bold mb-6 dark:text-white">
         You May Also Like
       </h2>
