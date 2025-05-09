@@ -7,6 +7,7 @@ import {
   LogOut,
   ArrowLeft,
   Menu,
+  Box,
 } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { logout } from "@/redux/slices/authSlice";
@@ -57,6 +58,16 @@ const AdminDashboardLayout = () => {
         {/* Navigation */}
         <nav className="space-y-4">
           <NavLink
+            to="overview"
+            className={({ isActive }) =>
+              `flex items-center gap-3 p-3 rounded transition ${
+                isActive ? "bg-blue-600 text-white" : "hover:bg-gray-700"
+              }`
+            }
+          >
+            <Box size={20} /> Overview
+          </NavLink>
+          <NavLink
             to="manage-products"
             className={({ isActive }) =>
               `flex items-center gap-3 p-3 rounded transition ${
@@ -76,6 +87,7 @@ const AdminDashboardLayout = () => {
           >
             <ShoppingCart size={20} /> Manage Orders
           </NavLink>
+
           <NavLink
             to="manage-users"
             className={({ isActive }) =>
