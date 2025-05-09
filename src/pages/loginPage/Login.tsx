@@ -36,6 +36,20 @@ export default function LoginPage() {
     }
   };
 
+  const autofillUser = () => {
+    setFormData({
+      email: "mdshahidsumon177@gmail.com",
+      password: "12345",
+    });
+  };
+
+  const autofillAdmin = () => {
+    setFormData({
+      email: "mdshahidsumon178@gmail.com",
+      password: "12345",
+    });
+  };
+
   return (
     <div className="min-h-screen lg:h-screen flex flex-col lg:flex-row">
       {/* Left Side */}
@@ -62,6 +76,23 @@ export default function LoginPage() {
             <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base transition-colors">
               Log in to access your dashboard.
             </p>
+            {/* Credential Buttons */}
+            <div className="flex gap-4  mt-4">
+              <button
+                onClick={autofillUser}
+                type="button"
+                className="px-4 py-1 bg-blue-500 text-white rounded-full hover:bg-blue-600 text-sm transition-all"
+              >
+                Use User Credential
+              </button>
+              <button
+                onClick={autofillAdmin}
+                type="button"
+                className="px-4 py-1 bg-purple-500 text-white rounded-full hover:bg-purple-600 text-sm transition-all"
+              >
+                Use Admin Credential
+              </button>
+            </div>
           </div>
 
           {/* Login Form */}
@@ -76,8 +107,9 @@ export default function LoginPage() {
               <input
                 type="email"
                 name="email"
-                placeholder="Enter your Email"
+                value={formData.email}
                 onChange={handleChange}
+                placeholder="Enter your Email"
                 className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-full text-[#101010] dark:text-white bg-white dark:bg-[#101010] focus:outline-none focus:ring-2 focus:ring-[#0AE08F] focus:border-transparent transition-all duration-200"
                 required
               />
@@ -94,8 +126,9 @@ export default function LoginPage() {
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
-                  placeholder="Type your Password"
+                  value={formData.password}
                   onChange={handleChange}
+                  placeholder="Type your Password"
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-full text-[#101010] dark:text-white bg-white dark:bg-[#101010] focus:outline-none focus:ring-2 focus:ring-[#0AE08F] focus:border-transparent transition-all duration-200"
                   required
                 />
