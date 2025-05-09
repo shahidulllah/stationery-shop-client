@@ -10,7 +10,14 @@ import {
   Line,
   Legend,
 } from "recharts";
-import { ShoppingCart, Users, DollarSign, Box } from "lucide-react";
+import {
+  ShoppingCart,
+  Users,
+  DollarSign,
+  Box,
+  ArrowBigRight,
+} from "lucide-react";
+import { Link } from "react-router";
 
 const summaryData = [
   {
@@ -44,6 +51,22 @@ const recentOrders = [
 export default function AdminOverview() {
   return (
     <div className="p-8 min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
+      {/* Breadcrumb */}
+      <nav className="text-sm text-gray-600 dark:text-gray-300 mb-6 flex gap-2 items-center">
+        <ArrowBigRight />
+        <Link to="/dashboard" className="hover:underline">
+          dashboard
+        </Link>{" "}
+        /
+        <Link to="/admin" className="mx-1 hover:underline">
+          {" "}
+          admin
+        </Link>{" "}
+        /
+        <span className="font-medium text-gray-800 dark:text-white">
+          overview
+        </span>
+      </nav>
       <h1 className="text-3xl font-bold mb-8">Admin Dashboard</h1>
 
       {/* Summary Cards */}

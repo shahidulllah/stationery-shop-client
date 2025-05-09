@@ -53,16 +53,16 @@ const ProductDetails = () => {
   return (
     <div className="pt-20 min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* 🧭 Breadcrumb */}
+        {/* Breadcrumb */}
         <nav className="text-sm text-gray-600 dark:text-gray-300 mb-6">
           <Link to="/" className="hover:underline">Home</Link> /
           <Link to="/products" className="mx-1 hover:underline"> Products</Link> /
           <span className="font-medium text-gray-800 dark:text-white">{product?.name}</span>
         </nav>
 
-        {/* 🛍️ Product Card */}
+        {/* Product Card */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden p-6 md:p-10">
-          {/* 🖼️ Product Image */}
+          {/* Product Image */}
           <div className="flex items-center justify-center">
             {product?.image ? (
               <img
@@ -75,7 +75,7 @@ const ProductDetails = () => {
             )}
           </div>
 
-          {/* 📋 Product Info */}
+          {/* Product Info */}
           <div className="flex flex-col justify-between">
             <div>
               <h1 className="text-4xl font-bold mb-2">{product?.name}</h1>
@@ -86,7 +86,7 @@ const ProductDetails = () => {
                 {product?.description}
               </p>
 
-              {/* 📌 Details Grid */}
+              {/*  Details Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
                 <Detail label="Brand" value={product?.brand || "Unknown"} />
                 <Detail label="Category" value={product?.category || "Unknown"} />
@@ -97,7 +97,7 @@ const ProductDetails = () => {
               </div>
             </div>
 
-            {/* 🛒 Add to Cart */}
+            {/*  Add to Cart */}
             <button
               onClick={handleAddToCart}
               className="mt-6 w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 hover:scale-[1.02] transition-all font-semibold shadow-md"
