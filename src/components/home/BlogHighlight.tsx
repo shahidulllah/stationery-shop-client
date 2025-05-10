@@ -1,7 +1,6 @@
 import { CalendarDays, ArrowRight } from "lucide-react";
 import { Link } from "react-router";
 
-
 const blogPosts = [
   {
     title: "Top 10 Stationery Essentials for School",
@@ -34,7 +33,7 @@ const BlogHighlights = () => {
     <section className="py-16 bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
-          Explore More With Blogs 
+          Explore More With Blogs
         </h2>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {blogPosts.map((post) => (
