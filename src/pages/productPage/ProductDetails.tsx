@@ -13,7 +13,9 @@ const ProductDetails = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.auth.user);
-  const { product, status, error } = useSelector((state: RootState) => state.products);
+  const { product, status, error } = useSelector(
+    (state: RootState) => state.products
+  );
 
   useEffect(() => {
     if (id) {
@@ -37,7 +39,9 @@ const ProductDetails = () => {
   if (status === "loading") {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
-        <p className="text-lg text-gray-700 dark:text-white">Loading product...</p>
+        <p className="text-lg text-gray-700 dark:text-white">
+          Loading product...
+        </p>
       </div>
     );
   }
@@ -55,9 +59,18 @@ const ProductDetails = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
         <nav className="text-sm text-gray-600 dark:text-gray-300 mb-6">
-          <Link to="/" className="hover:underline">Home</Link> /
-          <Link to="/products" className="mx-1 hover:underline"> Products</Link> /
-          <span className="font-medium text-gray-800 dark:text-white">{product?.name}</span>
+          <Link to="/" className="hover:underline">
+            Home
+          </Link>{" "}
+          /
+          <Link to="/products" className="mx-1 hover:underline">
+            {" "}
+            Products
+          </Link>{" "}
+          /
+          <span className="font-medium text-gray-800 dark:text-white">
+            {product?.name}
+          </span>
         </nav>
 
         {/* Product Card */}
@@ -71,7 +84,9 @@ const ProductDetails = () => {
                 className="w-full max-w-md object-cover rounded-lg shadow-lg hover:scale-105 transition-transform"
               />
             ) : (
-              <p className="text-gray-500 dark:text-gray-400">No image available</p>
+              <p className="text-gray-500 dark:text-gray-400">
+                No image available
+              </p>
             )}
           </div>
 
@@ -89,9 +104,15 @@ const ProductDetails = () => {
               {/*  Details Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
                 <Detail label="Brand" value={product?.brand || "Unknown"} />
-                <Detail label="Category" value={product?.category || "Unknown"} />
+                <Detail
+                  label="Category"
+                  value={product?.category || "Unknown"}
+                />
                 <Detail label="In Stock" value={`${product?.quantity} items`} />
-                <Detail label="SKU" value={`STN-${product?._id?.slice(-6).toUpperCase()}`} />
+                <Detail
+                  label="SKU"
+                  value={`STN-${product?._id?.slice(-6).toUpperCase()}`}
+                />
                 <Detail label="Delivery" value="Within 3–5 business days" />
                 <Detail label="Return Policy" value="7-day easy return" />
               </div>
