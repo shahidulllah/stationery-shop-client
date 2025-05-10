@@ -73,7 +73,9 @@ const DealsAndOffers: FC = () => {
                     {deal.tag}
                   </span>
                 </div>
-                <h3 className="text-xl font-semibold mb-1 line-clamp-1">{deal.title}</h3>
+                <h3 className="text-xl font-semibold mb-1 line-clamp-1">
+                  {deal.title}
+                </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
                   {deal.desc}
                 </p>
