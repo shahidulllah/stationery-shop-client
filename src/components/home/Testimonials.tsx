@@ -43,7 +43,7 @@ const Testimonials: FC = () => {
     <section className="py-14 bg-gray-50 dark:bg-gray-950 text-gray-800 dark:text-white">
       <div className="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto text-center">
         <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-           What Our Customers Say?
+          What Our Customers Say?
         </h2>
         <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12">
           Real feedback from our happy customers who love our products and
