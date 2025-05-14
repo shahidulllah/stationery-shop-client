@@ -4,7 +4,8 @@ import { RootState, AppDispatch } from "@/redux/store";
 import { fetchUsers, deleteUser } from "@/redux/slices/userSlice";
 import { toast } from "sonner";
 import EditUserModal from "../../cart/utils/EditUserModal";
-import { Pencil, Trash2, Loader2, AlertCircle } from "lucide-react";
+import { Pencil, Trash2, Loader2, AlertCircle, ArrowBigRight } from "lucide-react";
+import { Link } from "react-router";
 
 type User = {
   _id: string;
@@ -49,8 +50,22 @@ const ManageUsers = () => {
           onClose={() => setIsModalOpen(false)}
         />
       )}
-
-      <h2 className="text-2xl font-semibold text-gray-900 dark:text-white text-center mb-6">
+      <nav className="text-sm text-gray-600 dark:text-gray-300 mb-6 flex gap-2 items-center">
+        <ArrowBigRight />
+        <Link to="/dashboard" className="hover:underline">
+          dashboard
+        </Link>{" "}
+        /
+        <Link to="/admin" className="mx-1 hover:underline">
+          {" "}
+          admin
+        </Link>{" "}
+        /
+        <span className="font-medium text-gray-800 dark:text-white">
+          manage-users
+        </span>
+      </nav>
+      <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
         Manage Users
       </h2>
 
@@ -64,9 +79,9 @@ const ManageUsers = () => {
           {error}
         </div>
       ) : (
-        <div className="overflow-x-auto overflow-y-scroll max-h-[500px] border rounded-lg">
+        <div className="overflow-x-auto overflow-y-scroll max-h-[450px] border rounded-lg">
           <table className="min-w-full text-left border-collapse">
-            <thead className="bg-gray-800 dark:bg-gray-700 text-white">
+            <thead className="bg-gray-800 dark:bg-gray-700 text-white sticky top-0">
               <tr>
                 <th className="p-3">Name</th>
                 <th className="p-3">Email</th>
