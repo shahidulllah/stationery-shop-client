@@ -18,7 +18,7 @@ const testimonials: Testimonial[] = [
     review:
       "Absolutely love the range of art supplies! Great prices, fast delivery, and the quality is top-notch.",
     rating: 5,
-    avatar: "/images/avatar1.jpg",
+    avatar: "/public/images/profile/p-1.jpeg",
   },
   {
     name: "Rahul Sen",
@@ -26,7 +26,7 @@ const testimonials: Testimonial[] = [
     review:
       "This is my go-to place for stationery. The deals are amazing and everything is super affordable.",
     rating: 4,
-    avatar: "/images/avatar2.jpg",
+    avatar: "/public/images/profile/p-2.jpeg",
   },
   {
     name: "Sana Sheikh",
@@ -34,7 +34,7 @@ const testimonials: Testimonial[] = [
     review:
       "Easy to order and customer service is excellent. The tech accessories and writing tools are very reliable.",
     rating: 5,
-    avatar: "/images/avatar3.jpg",
+    avatar: "/public/images/profile/p-3.jpeg",
   },
 ];
 
