@@ -44,11 +44,12 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 w-full bg-green-100 dark:bg-gray-900 shadow-md z-50 h-16">
+    <nav className="fixed top-0 w-full inset-0 bg-gradient-to-r from-blue-400 to-green-400 dark:from-gray-800 dark:to-gray-900 overflow-hidden shadow-md z-50 h-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <NavLink to="/" className="flex items-center space-x-3">
           <h1 className="font-bold text-2xl sm:text-3xl dark:text-white">
-            STN Crack
+            S<span className="text-green-800 font-semibold">T</span>N{" "}
+            <span className="text-green-800 font-semibold">C</span>rack
           </h1>
         </NavLink>
 
@@ -62,7 +63,7 @@ const Navbar = () => {
                 `text-lg px-3 py-2 border-b-2 transition-colors ${
                   isActive
                     ? "border-primary text-primary"
-                    : "border-transparent text-gray-700 dark:text-white hover:text-primary"
+                    : "border-transparent text-black dark:text-white hover:text-primary"
                 }`
               }
             >
