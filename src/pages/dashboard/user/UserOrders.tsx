@@ -61,7 +61,7 @@ const UserOrders = () => {
         ) : (
           <>
             <div className="overflow-x-auto">
-              <div className="max-h-96 overflow-y-auto border rounded-lg shadow-md">
+              <div className="max-h-[450px] overflow-y-auto border rounded-lg shadow-md">
                 <table className="w-full border-collapse text-center">
                   <thead className="sticky top-0 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white">
                     <tr>
