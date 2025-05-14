@@ -44,7 +44,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 w-full inset-0 bg-gradient-to-r from-blue-400 to-green-400 dark:from-gray-800 dark:to-gray-900 overflow-hidden shadow-md z-50 h-16">
+    <nav className="fixed top-0 w-full inset-0 bg-gradient-to-r from-gray-200 via-slate-300 to-gray-100 dark:from-gray-800 dark:to-gray-900 shadow-lg z-50 h-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <NavLink to="/" className="flex items-center space-x-3">
           <h1 className="font-bold text-2xl sm:text-3xl dark:text-white">
@@ -60,7 +60,7 @@ const Navbar = () => {
               key={item.href}
               to={item.href}
               className={({ isActive }) =>
-                `text-lg px-3 py-2 border-b-2 transition-colors ${
+                `text-lg px-3 py-0 border-b-2 transition-colors ${
                   isActive
                     ? "border-primary text-primary"
                     : "border-transparent text-black dark:text-white hover:text-primary"
@@ -96,7 +96,7 @@ const Navbar = () => {
                 />
               </button>
               {dropdownOpen && (
-                <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 shadow-lg rounded-lg py-3 px-4 z-50 transition-all duration-300">
+                <div className="absolute right-0 mt-2 w-64 bg-gradient-to-r from-gray-200 via-slate-300 to-gray-100 dark:from-gray-800 dark:to-gray-900 shadow-lg rounded-lg py-3 px-4 z-50 transition-all duration-300">
                   {/* Profile Header */}
                   <div className="flex flex-col justify-center items-center space-x-3 border-b pb-3 mb-3">
                     {user?.role === "user" && (
