@@ -5,8 +5,9 @@ import { deleteProduct, fetchProducts } from "@/redux/slices/productSlice";
 import { toast } from "sonner";
 import EditProductModal from "../../cart/utils/EditProductModal";
 import { Product } from "@/types";
-import { Plus, Trash, Pencil } from "lucide-react";
+import { Plus, Trash, Pencil, ArrowBigRight } from "lucide-react";
 import AddProductModal from "@/pages/cart/utils/AddProductModal";
+import { Link } from "react-router";
 
 const ManageProducts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -61,17 +62,34 @@ const ManageProducts = () => {
           onClose={() => setIsAddModalOpen(false)}
         />
       )}
-      <div className="flex max-w-5xl mx-auto justify-between items-center mb-4">
-        <h2 className="text-3xl font-bold">Manage Products</h2>
-        <button
-          className="flex items-center gap-2 bg-green-400 hover:bg-green-500 text-white px-4 py-2 rounded-full"
-          onClick={() => setIsAddModalOpen(true)}
-        >
-          <Plus size={18} /> Add Product
-        </button>
+      <div className="">
+        <nav className="text-sm text-gray-600 dark:text-gray-300 mb-6 flex gap-2 items-center">
+          <ArrowBigRight />
+          <Link to="/dashboard" className="hover:underline">
+            dashboard
+          </Link>{" "}
+          /
+          <Link to="/admin" className="mx-1 hover:underline">
+            {" "}
+            admin
+          </Link>{" "}
+          /
+          <span className="font-medium text-gray-800 dark:text-white">
+            manage-products
+          </span>
+        </nav>
+        <div className="flex mx-auto justify-between items-center mb-8">
+          <h2 className="text-3xl font-bold">Manage Products</h2>
+          <button
+            className="flex items-center gap-2 bg-green-400 hover:bg-green-500 text-white px-4 py-2 rounded-full"
+            onClick={() => setIsAddModalOpen(true)}
+          >
+            <Plus size={18} /> Add Product
+          </button>
+        </div>
       </div>
 
-      <div className="overflow-x-auto max-h-[500px] overflow-y-scroll border rounded-lg">
+      <div className="overflow-x-auto max-h-[450px] overflow-y-scroll border rounded-lg">
         <table className="min-w-full border-collapse border text-left">
           <thead className="bg-gray-800 text-white sticky top-0">
             <tr>
