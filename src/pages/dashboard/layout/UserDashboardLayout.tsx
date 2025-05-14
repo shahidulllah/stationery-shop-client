@@ -17,7 +17,7 @@ const UserDashboardLayout = () => {
     <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900">
       {/* Sidebar */}
       <aside
-        className={`fixed lg:relative z-50 w-64 bg-gray-800 text-white p-5 transform ${
+        className={`fixed top-0 left-0 h-screen z-50 w-64 bg-gray-800 text-white p-5 transform ${
           isSidebarOpen ? "translate-x-0 min-h-screen" : "-translate-x-full"
         } lg:translate-x-0 transition-transform duration-300 ease-in-out`}
       >
