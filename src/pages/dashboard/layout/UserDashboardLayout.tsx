@@ -91,7 +91,7 @@ const UserDashboardLayout = () => {
       </button>
 
       {/* Main Content */}
-      <main className="flex-1 p-6">
+      <main className="flex-1 lg:ml-64 p-6 min-h-screen">
         <Outlet />
       </main>
     </div>
