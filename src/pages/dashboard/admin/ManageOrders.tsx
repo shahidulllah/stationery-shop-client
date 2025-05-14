@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/redux/store";
 import { fetchOrders, updateOrderStatus } from "@/redux/slices/orderSlice";
 import { toast } from "sonner";
-import { AppWindow, CropIcon } from "lucide-react";
+import { AppWindow, ArrowBigRight, CropIcon } from "lucide-react";
+import { Link } from "react-router";
 
 const ManageOrders = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -31,12 +32,27 @@ const ManageOrders = () => {
     return <p className="text-center text-red-500">{error}</p>;
 
   return (
-    <div className="max-w-6xl mx-auto p-6 bg-white dark:bg-gray-900 shadow-lg rounded-lg">
-      <h2 className="text-3xl font-bold text-gray-900 dark:text-white text-center mb-6">
+    <div className=" mx-auto p-6 bg-white dark:bg-gray-900 shadow-lg rounded-lg">
+      <nav className="text-sm text-gray-600 dark:text-gray-300 mb-6 flex gap-2 items-center">
+        <ArrowBigRight />
+        <Link to="/dashboard" className="hover:underline">
+          dashboard
+        </Link>{" "}
+        /
+        <Link to="/admin" className="mx-1 hover:underline">
+          {" "}
+          admin
+        </Link>{" "}
+        /
+        <span className="font-medium text-gray-800 dark:text-white">
+          manage-order
+        </span>
+      </nav>
+      <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
         Manage Orders
       </h2>
 
-      <div className="overflow-x-auto max-h-[500px] overflow-y-auto border rounded-lg shadow-md">
+      <div className="overflow-x-auto max-h-[450px] overflow-y-auto border rounded-lg shadow-md">
         <table className="min-w-full border-collapse border dark:border-gray-700 text-left">
           <thead className="bg-gray-800 dark:bg-gray-700 text-white sticky top-0">
             <tr>

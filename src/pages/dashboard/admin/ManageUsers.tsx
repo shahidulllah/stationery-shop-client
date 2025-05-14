@@ -42,7 +42,7 @@ const ManageUsers = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-6 bg-white dark:bg-gray-900 shadow-lg rounded-lg">
+    <div className="mx-auto p-6 bg-white dark:bg-gray-900 shadow-lg rounded-lg">
       {isModalOpen && selectedUser && (
         <EditUserModal
           user={selectedUser}

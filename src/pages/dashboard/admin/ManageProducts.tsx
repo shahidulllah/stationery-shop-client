@@ -46,7 +46,7 @@ const ManageProducts = () => {
   if (status === "failed") return <p>Error: {error}</p>;
 
   return (
-    <div className="max-w-5xl mx-auto p-6 bg-white shadow-md rounded-lg">
+    <div className="mx-auto p-6 bg-white shadow-md rounded-lg">
       {isModalOpen && (
         <EditProductModal
           product={selectedProduct}

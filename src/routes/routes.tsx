@@ -77,7 +77,7 @@ export const router = createBrowserRouter([
             index: true,
             element: (
               <>
-                <ManageProducts />
+                <AdminOverview />
               </>
             ),
           },
