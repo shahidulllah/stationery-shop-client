@@ -6,7 +6,7 @@ const blogPosts = [
     title: "Top 10 Stationery Essentials for School",
     excerpt:
       "Discover the must-have stationery items every student needs to stay organized and productive this school year.",
-    image: "/public/images/blogs/blog-1.jpeg",
+    image: "/images/blogs/blog-1.jpeg",
     date: "2025-04-10",
     slug: "/blogs/stationery-essentials",
   },
@@ -14,7 +14,7 @@ const blogPosts = [
     title: "Boost Creativity with Art Supplies",
     excerpt:
       "Learn how high-quality art supplies can spark creativity in kids and adults alike.",
-    image: "/public/images/blogs/blog-2.jpeg",
+    image: "/images/blogs/blog-2.jpeg",
     date: "2025-03-28",
     slug: "/blogs/creative-art-supplies",
   },
@@ -22,7 +22,7 @@ const blogPosts = [
     title: "Office Setup Tips for Maximum Efficiency",
     excerpt:
       "Explore smart tips and tools to set up a productive and organized office space using the right stationery.",
-    image: "/public/images/blogs/blog-3.jpeg",
+    image: "/images/blogs/blog-3.jpeg",
     date: "2025-03-15",
     slug: "/blogs/office-setup-tips",
   },

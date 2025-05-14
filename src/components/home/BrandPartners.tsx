@@ -1,9 +1,9 @@
 const brands = [
-  "/public/images/brands/brand-1.jpeg",
-  "/public/images/brands/brand-2.jpeg",
-  "/public/images/brands/brand-3.jpeg",
-  "/public/images/brands/brand-4.jpeg",
-  "/public/images/brands/brand-5.jpeg",
+  "/images/brands/brand-1.jpeg",
+  "/images/brands/brand-2.jpeg",
+  "/images/brands/brand-3.jpeg",
+  "/images/brands/brand-4.jpeg",
+  "/images/brands/brand-5.jpeg",
 ];
 
 const BrandPartners = () => {

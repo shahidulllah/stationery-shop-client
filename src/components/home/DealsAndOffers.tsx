@@ -15,7 +15,7 @@ const deals: Deal[] = [
   {
     title: "Hot Deal: 25% Off Writing Tools",
     desc: "Get top-quality pens, pencils, and markers at 25% off. Limited time offer!",
-    image: "/public/images/offers/p-1.jpg",
+    image: "/images/offers/p-1.jpg",
     tag: "Limited Time",
     link: "/products?category=Writing",
     icon: <Flame className="text-red-500 w-6 h-6" />,
@@ -23,7 +23,7 @@ const deals: Deal[] = [
   {
     title: "Flash Sale: Office Supplies",
     desc: "Essential office items at discounted prices. Hurry, offer ends soon!",
-    image: "/public/images/offers/p-2.png",
+    image: "/images/offers/p-2.png",
     tag: "Flash Sale",
     link: "/products?category=OfficeSupplies",
     icon: <Clock3 className="text-yellow-400 w-6 h-6" />,
@@ -31,7 +31,7 @@ const deals: Deal[] = [
   {
     title: "Art Supplies Special - 15% Off",
     desc: "Bring creativity to life with discounted brushes, paints & more.",
-    image: "/public/images/offers/p-3.png",
+    image: "/images/offers/p-3.png",
     tag: "Exclusive",
     link: "/products?category=ArtSupplies",
     icon: <Percent className="text-green-500 w-6 h-6" />,
@@ -39,7 +39,7 @@ const deals: Deal[] = [
   {
     title: "Flash Sale: Office Supplies",
     desc: "Essential office items at discounted prices. Hurry, offer ends soon!",
-    image: "/public/images/offers/p-4.webp",
+    image: "/images/offers/p-4.webp",
     tag: "Flash Sale",
     link: "/products?category=OfficeSupplies",
     icon: <Clock3 className="text-yellow-400 w-6 h-6" />,
