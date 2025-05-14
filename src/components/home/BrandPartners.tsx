@@ -1,9 +1,9 @@
 const brands = [
-  "/public/images/blogs/blog-1.jpeg",
-  "/public/images/blogs/blog-1.jpeg",
-  "/public/images/blogs/blog-1.jpeg",
-  "/public/images/blogs/blog-1.jpeg",
-  "/public/images/blogs/blog-1.jpeg",
+  "/public/images/brands/brand-1.jpeg",
+  "/public/images/brands/brand-2.jpeg",
+  "/public/images/brands/brand-3.jpeg",
+  "/public/images/brands/brand-4.jpeg",
+  "/public/images/brands/brand-5.jpeg",
 ];
 
 const BrandPartners = () => {
@@ -19,7 +19,7 @@ const BrandPartners = () => {
               key={index}
               src={src}
               alt={`Brand ${index + 1}`}
-              className="h-36 grayscale hover:grayscale-0 transition duration-300"
+              className="h-36 rounded-md hover:grayscale-0 transition duration-300"
             />
           ))}
         </div>
