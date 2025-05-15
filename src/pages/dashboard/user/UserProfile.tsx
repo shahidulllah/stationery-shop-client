@@ -63,7 +63,7 @@ const UserProfile = () => {
       <h2 className="text-3xl font-bold mb-8">My Profile</h2>
       <div className="flex justify-between gap-6 ">
         <div className="flex items-center justify-center w-8/12 border rounded-lg">
-          User Information
+          Profile Information
         </div>
         <div className="w-6/12 ">
           <form onSubmit={handleUpdateProfile} className="space-y-5">
