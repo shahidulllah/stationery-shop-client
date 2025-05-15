@@ -32,7 +32,7 @@ const UserProfile = () => {
 
       dispatch(updateProfile(updatedUser));
 
-      toast.success("Profile updated successfully!");
+      toast.success("Your Profile is updated successfully!");
 
       setName("");
       setImage("");
